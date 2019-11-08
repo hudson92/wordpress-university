@@ -1,0 +1,39 @@
+[07-Nov-2019 21:47:23 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/index.php on line 2
+[07-Nov-2019 21:47:28 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/index.php on line 2
+[07-Nov-2019 21:48:02 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/index.php on line 2
+[07-Nov-2019 21:48:48 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/index.php on line 2
+[07-Nov-2019 21:48:48 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/index.php on line 2
+[07-Nov-2019 21:48:49 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/index.php on line 2
+[07-Nov-2019 22:13:06 UTC] PHP Parse error:  syntax error, unexpected ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/index.php on line 9
+[07-Nov-2019 22:28:29 UTC] PHP Parse error:  syntax error, unexpected '}' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/index.php on line 6
+[07-Nov-2019 23:30:24 UTC] PHP Parse error:  syntax error, unexpected 'wp_enqueue_style' (T_STRING) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 5
+[08-Nov-2019 20:37:57 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 7
+[08-Nov-2019 20:37:57 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 7
+[08-Nov-2019 20:38:12 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 7
+[08-Nov-2019 20:45:33 UTC] PHP Warning:  Use of undefined constant the_title - assumed 'the_title' (this will throw an Error in a future version of PHP) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/page.php on line 21
+[08-Nov-2019 20:45:33 UTC] PHP Stack trace:
+[08-Nov-2019 20:45:33 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/index.php:0
+[08-Nov-2019 20:45:33 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
+[08-Nov-2019 20:45:33 UTC] PHP   3. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:19
+[08-Nov-2019 20:45:33 UTC] PHP   4. include() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template-loader.php:78
+[08-Nov-2019 21:14:52 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/page.php on line 23
+[08-Nov-2019 21:15:14 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/page.php on line 23
+[08-Nov-2019 21:15:15 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/page.php on line 23
+[08-Nov-2019 21:18:28 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function wp_get_post_parent_id(), 0 passed in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/page.php on line 21 and exactly 1 expected in /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/post.php:6595
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/page.php(21): wp_get_post_parent_id()
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template-loader.php(78): include('/Users/samhudso...')
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php(19): require_once('/Users/samhudso...')
+#3 /Users/samhudson/Local Sites/fake-university/app/public/index.php(17): require('/Users/samhudso...')
+#4 {main}
+  thrown in /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/post.php on line 6595
+[08-Nov-2019 21:18:34 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function wp_get_post_parent_id(), 0 passed in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/page.php on line 21 and exactly 1 expected in /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/post.php:6595
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/page.php(21): wp_get_post_parent_id()
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template-loader.php(78): include('/Users/samhudso...')
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php(19): require_once('/Users/samhudso...')
+#3 /Users/samhudson/Local Sites/fake-university/app/public/index.php(17): require('/Users/samhudso...')
+#4 {main}
+  thrown in /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/post.php on line 6595
+[08-Nov-2019 21:19:05 UTC] PHP Parse error:  syntax error, unexpected ')', expecting ',' or ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/page.php on line 21
+[08-Nov-2019 21:27:41 UTC] PHP Parse error:  syntax error, unexpected 'if' (T_IF) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/page.php on line 22
