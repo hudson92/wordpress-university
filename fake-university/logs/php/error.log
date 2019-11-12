@@ -50,3 +50,13 @@ Stack trace:
 #2 /Users/samhudson/Local Sites/fake-university/app/public/index.php(17): require('/Users/samhudso...')
 #3 {main}
   thrown in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/page.php on line 33
+[12-Nov-2019 22:41:07 UTC] PHP Warning:  Use of undefined constant language_attributes - assumed 'language_attributes' (this will throw an Error in a future version of PHP) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/header.php on line 2
+[12-Nov-2019 22:41:07 UTC] PHP Stack trace:
+[12-Nov-2019 22:41:07 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/index.php:0
+[12-Nov-2019 22:41:07 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
+[12-Nov-2019 22:41:07 UTC] PHP   3. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:19
+[12-Nov-2019 22:41:07 UTC] PHP   4. include() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template-loader.php:78
+[12-Nov-2019 22:41:07 UTC] PHP   5. get_header() /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/index.php:2
+[12-Nov-2019 22:41:07 UTC] PHP   6. locate_template() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/general-template.php:41
+[12-Nov-2019 22:41:07 UTC] PHP   7. load_template() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template.php:671
+[12-Nov-2019 22:41:07 UTC] PHP   8. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template.php:722
