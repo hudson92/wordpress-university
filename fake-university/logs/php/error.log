@@ -60,3 +60,6 @@ Stack trace:
 [12-Nov-2019 22:41:07 UTC] PHP   6. locate_template() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/general-template.php:41
 [12-Nov-2019 22:41:07 UTC] PHP   7. load_template() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template.php:671
 [12-Nov-2019 22:41:07 UTC] PHP   8. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template.php:722
+[13-Nov-2019 22:59:46 UTC] PHP Parse error:  syntax error, unexpected 'the_author' (T_STRING), expecting ',' or ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/archive.php on line 12
+[13-Nov-2019 22:59:56 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/archive.php on line 13
+[13-Nov-2019 22:59:57 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/archive.php on line 13
