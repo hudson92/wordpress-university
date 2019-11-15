@@ -1,5 +1,6 @@
 .hero-slider {
   position: relative;
+  background-color: red;
 
   div {
     outline: none;

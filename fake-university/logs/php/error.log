@@ -78,3 +78,15 @@ Stack trace:
 [14-Nov-2019 21:47:22 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
 [14-Nov-2019 21:47:22 UTC] PHP   3. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:19
 [14-Nov-2019 21:47:22 UTC] PHP   4. include() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template-loader.php:78
+[15-Nov-2019 22:06:58 UTC] PHP Warning:  call_user_func_array() expects parameter 1 to be a valid callback, function 'university_post_types' not found or invalid function name in /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php on line 286
+[15-Nov-2019 22:06:58 UTC] PHP Stack trace:
+[15-Nov-2019 22:06:58 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/index.php:0
+[15-Nov-2019 22:06:58 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
+[15-Nov-2019 22:06:58 UTC] PHP   3. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:13
+[15-Nov-2019 22:06:58 UTC] PHP   4. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-load.php:37
+[15-Nov-2019 22:06:58 UTC] PHP   5. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-config.php:77
+[15-Nov-2019 22:06:58 UTC] PHP   6. do_action() /Users/samhudson/Local Sites/fake-university/app/public/wp-settings.php:525
+[15-Nov-2019 22:06:58 UTC] PHP   7. WP_Hook->do_action() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/plugin.php:465
+[15-Nov-2019 22:06:58 UTC] PHP   8. WP_Hook->apply_filters() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:310
+[15-Nov-2019 22:27:19 UTC] PHP Parse error:  syntax error, unexpected '}' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php on line 29
+[15-Nov-2019 22:31:57 UTC] PHP Parse error:  syntax error, unexpected '<' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php on line 31
