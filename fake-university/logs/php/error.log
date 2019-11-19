@@ -90,3 +90,89 @@ Stack trace:
 [15-Nov-2019 22:06:58 UTC] PHP   8. WP_Hook->apply_filters() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:310
 [15-Nov-2019 22:27:19 UTC] PHP Parse error:  syntax error, unexpected '}' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php on line 29
 [15-Nov-2019 22:31:57 UTC] PHP Parse error:  syntax error, unexpected '<' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php on line 31
+[16-Nov-2019 20:54:33 UTC] PHP Fatal error:  Uncaught Exception: DateTime::__construct(): Failed to parse time string (21/12/2019) at position 0 (2): Unexpected character in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php:31
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php(31): DateTime->__construct('21/12/2019')
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template-loader.php(78): include('/Users/samhudso...')
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php(19): require_once('/Users/samhudso...')
+#3 /Users/samhudson/Local Sites/fake-university/app/public/index.php(17): require('/Users/samhudso...')
+#4 {main}
+  thrown in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php on line 31
+[16-Nov-2019 20:54:40 UTC] PHP Fatal error:  Uncaught Exception: DateTime::__construct(): Failed to parse time string (21/12/2019) at position 0 (2): Unexpected character in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php:31
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php(31): DateTime->__construct('21/12/2019')
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template-loader.php(78): include('/Users/samhudso...')
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php(19): require_once('/Users/samhudso...')
+#3 /Users/samhudson/Local Sites/fake-university/app/public/index.php(17): require('/Users/samhudso...')
+#4 {main}
+  thrown in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php on line 31
+[16-Nov-2019 20:55:17 UTC] PHP Fatal error:  Uncaught Exception: DateTime::__construct(): Failed to parse time string (21/12/2019) at position 0 (2): Unexpected character in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php:31
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php(31): DateTime->__construct('21/12/2019')
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template-loader.php(78): include('/Users/samhudso...')
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php(19): require_once('/Users/samhudso...')
+#3 /Users/samhudson/Local Sites/fake-university/app/public/index.php(17): require('/Users/samhudso...')
+#4 {main}
+  thrown in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php on line 31
+[16-Nov-2019 20:55:28 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php on line 32
+[16-Nov-2019 20:55:38 UTC] PHP Parse error:  syntax error, unexpected '$eventDate' (T_VARIABLE) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php on line 32
+[16-Nov-2019 20:55:45 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php on line 32
+[16-Nov-2019 20:55:49 UTC] PHP Fatal error:  Uncaught Exception: DateTime::__construct(): Failed to parse time string (21/12/2019) at position 0 (2): Unexpected character in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php:31
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php(31): DateTime->__construct('21/12/2019')
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template-loader.php(78): include('/Users/samhudso...')
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php(19): require_once('/Users/samhudso...')
+#3 /Users/samhudson/Local Sites/fake-university/app/public/index.php(17): require('/Users/samhudso...')
+#4 {main}
+  thrown in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php on line 31
+[16-Nov-2019 20:56:21 UTC] PHP Fatal error:  Uncaught Exception: DateTime::__construct(): Failed to parse time string (21/12/2019) at position 0 (2): Unexpected character in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php:31
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php(31): DateTime->__construct('21/12/2019')
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template-loader.php(78): include('/Users/samhudso...')
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php(19): require_once('/Users/samhudso...')
+#3 /Users/samhudson/Local Sites/fake-university/app/public/index.php(17): require('/Users/samhudso...')
+#4 {main}
+  thrown in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php on line 31
+[16-Nov-2019 20:58:13 UTC] PHP Fatal error:  Uncaught Exception: DateTime::__construct(): Failed to parse time string (21/12/2019) at position 0 (2): Unexpected character in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php:31
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php(31): DateTime->__construct('21/12/2019')
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template-loader.php(78): include('/Users/samhudso...')
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php(19): require_once('/Users/samhudso...')
+#3 /Users/samhudson/Local Sites/fake-university/app/public/index.php(17): require('/Users/samhudso...')
+#4 {main}
+  thrown in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php on line 31
+[16-Nov-2019 20:58:16 UTC] PHP Fatal error:  Uncaught Exception: DateTime::__construct(): Failed to parse time string (21/12/2019) at position 0 (2): Unexpected character in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php:31
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php(31): DateTime->__construct('21/12/2019')
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template-loader.php(78): include('/Users/samhudso...')
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php(19): require_once('/Users/samhudso...')
+#3 /Users/samhudson/Local Sites/fake-university/app/public/index.php(17): require('/Users/samhudso...')
+#4 {main}
+  thrown in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php on line 31
+[16-Nov-2019 20:58:41 UTC] PHP Fatal error:  Uncaught Exception: DateTime::__construct(): Failed to parse time string (21/12/2019) at position 0 (2): Unexpected character in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php:31
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php(31): DateTime->__construct('21/12/2019')
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template-loader.php(78): include('/Users/samhudso...')
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php(19): require_once('/Users/samhudso...')
+#3 /Users/samhudson/Local Sites/fake-university/app/public/index.php(17): require('/Users/samhudso...')
+#4 {main}
+  thrown in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php on line 31
+[16-Nov-2019 20:58:51 UTC] PHP Fatal error:  Uncaught Exception: DateTime::__construct(): Failed to parse time string (21/12/2019) at position 0 (2): Unexpected character in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php:31
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php(31): DateTime->__construct('21/12/2019')
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template-loader.php(78): include('/Users/samhudso...')
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php(19): require_once('/Users/samhudso...')
+#3 /Users/samhudson/Local Sites/fake-university/app/public/index.php(17): require('/Users/samhudso...')
+#4 {main}
+  thrown in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php on line 31
+[16-Nov-2019 20:58:56 UTC] PHP Fatal error:  Uncaught Exception: DateTime::__construct(): Failed to parse time string (21/12/2019) at position 0 (2): Unexpected character in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php:31
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php(31): DateTime->__construct('21/12/2019')
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template-loader.php(78): include('/Users/samhudso...')
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php(19): require_once('/Users/samhudso...')
+#3 /Users/samhudson/Local Sites/fake-university/app/public/index.php(17): require('/Users/samhudso...')
+#4 {main}
+  thrown in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php on line 31
+[18-Nov-2019 21:19:19 UTC] PHP Parse error:  syntax error, unexpected 'or' (T_LOGICAL_OR) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 22
+[18-Nov-2019 21:19:19 UTC] PHP Parse error:  syntax error, unexpected 'or' (T_LOGICAL_OR) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 22
+[18-Nov-2019 21:19:19 UTC] PHP Parse error:  syntax error, unexpected 'or' (T_LOGICAL_OR) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 22
