@@ -176,3 +176,7 @@ Stack trace:
 [18-Nov-2019 21:19:19 UTC] PHP Parse error:  syntax error, unexpected 'or' (T_LOGICAL_OR) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 22
 [18-Nov-2019 21:19:19 UTC] PHP Parse error:  syntax error, unexpected 'or' (T_LOGICAL_OR) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 22
 [18-Nov-2019 21:19:19 UTC] PHP Parse error:  syntax error, unexpected 'or' (T_LOGICAL_OR) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 22
+[20-Nov-2019 23:00:13 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-event.php on line 33
+[20-Nov-2019 23:00:18 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-event.php on line 33
+[20-Nov-2019 23:14:17 UTC] PHP Parse error:  syntax error, unexpected 'while' (T_WHILE), expecting ',' or ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-program.php on line 54
+[20-Nov-2019 23:14:56 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-program.php on line 53
