@@ -180,3 +180,37 @@ Stack trace:
 [20-Nov-2019 23:00:18 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-event.php on line 33
 [20-Nov-2019 23:14:17 UTC] PHP Parse error:  syntax error, unexpected 'while' (T_WHILE), expecting ',' or ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-program.php on line 54
 [20-Nov-2019 23:14:56 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-program.php on line 53
+[22-Nov-2019 21:20:38 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function the_post_thumbail() in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-professor.php:23
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template-loader.php(78): include()
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php(19): require_once('/Users/samhudso...')
+#2 /Users/samhudson/Local Sites/fake-university/app/public/index.php(17): require('/Users/samhudso...')
+#3 {main}
+  thrown in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-professor.php on line 23
+[22-Nov-2019 21:20:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function the_post_thumbail() in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-professor.php:23
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template-loader.php(78): include()
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php(19): require_once('/Users/samhudso...')
+#2 /Users/samhudson/Local Sites/fake-university/app/public/index.php(17): require('/Users/samhudso...')
+#3 {main}
+  thrown in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-professor.php on line 23
+[10-Dec-2019 21:31:27 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function pageBanner(), 0 passed in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/page.php on line 7 and exactly 1 expected in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php:3
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/page.php(7): pageBanner()
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template-loader.php(78): include('/Users/samhudso...')
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php(19): require_once('/Users/samhudso...')
+#3 /Users/samhudson/Local Sites/fake-university/app/public/index.php(17): require('/Users/samhudso...')
+#4 {main}
+  thrown in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 3
+[11-Dec-2019 22:00:23 UTC] PHP Parse error:  syntax error, unexpected '<' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-campus.php on line 59
+[11-Dec-2019 22:00:59 UTC] PHP Parse error:  syntax error, unexpected '<' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-campus.php on line 60
+[11-Dec-2019 22:01:40 UTC] PHP Parse error:  syntax error, unexpected '<' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-campus.php on line 58
+[11-Dec-2019 22:04:32 UTC] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-campus.php on line 29
+[11-Dec-2019 22:04:44 UTC] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-campus.php on line 38
+[11-Dec-2019 22:12:53 UTC] PHP Parse error:  syntax error, unexpected 'Programs' (T_STRING), expecting ',' or ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-campus.php on line 40
+[11-Dec-2019 22:24:04 UTC] PHP Parse error:  syntax error, unexpected 'foreach' (T_FOREACH), expecting ',' or ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-program.php on line 96
+[11-Dec-2019 22:24:26 UTC] PHP Parse error:  syntax error, unexpected 'foreach' (T_FOREACH), expecting ',' or ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-program.php on line 96
+[11-Dec-2019 22:25:01 UTC] PHP Parse error:  syntax error, unexpected 'foreach' (T_FOREACH), expecting ',' or ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-program.php on line 96
+[11-Dec-2019 22:25:29 UTC] PHP Parse error:  syntax error, unexpected '}' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-program.php on line 100
+[11-Dec-2019 22:25:47 UTC] PHP Parse error:  syntax error, unexpected '}' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-program.php on line 100
+[11-Dec-2019 22:34:40 UTC] PHP Parse error:  syntax error, unexpected end of file in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/archive-campus.php on line 29
