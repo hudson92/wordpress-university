@@ -214,3 +214,239 @@ Stack trace:
 [11-Dec-2019 22:25:29 UTC] PHP Parse error:  syntax error, unexpected '}' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-program.php on line 100
 [11-Dec-2019 22:25:47 UTC] PHP Parse error:  syntax error, unexpected '}' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/single-program.php on line 100
 [11-Dec-2019 22:34:40 UTC] PHP Parse error:  syntax error, unexpected end of file in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/archive-campus.php on line 29
+[27-Jan-2020 22:29:19 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 24
+[27-Jan-2020 22:29:19 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 24
+[27-Jan-2020 22:29:27 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 24
+[27-Jan-2020 22:36:33 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 16
+[27-Jan-2020 22:36:33 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 16
+[27-Jan-2020 22:36:33 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 16
+[27-Jan-2020 22:36:46 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 16
+[27-Jan-2020 22:38:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function sanatize_text_field() in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php:16
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php(946): universitySearchResults(Object(WP_REST_Request))
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php(329): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php(309): WP_REST_Server->serve_request('/university/v1/...')
+#3 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php(286): rest_api_loaded(Object(WP))
+#4 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters('', Array)
+#5 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/plugin.php(531): WP_Hook->do_action(Array) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 16
+[04-Feb-2020 22:50:20 UTC] PHP Fatal error:  Cannot redeclare universitySearchResults() (previously declared in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/mu-plugins/university-post-types.php:12) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 13
+[04-Feb-2020 22:50:20 UTC] PHP Stack trace:
+[04-Feb-2020 22:50:20 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/index.php:0
+[04-Feb-2020 22:50:20 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
+[04-Feb-2020 22:50:20 UTC] PHP   3. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:13
+[04-Feb-2020 22:50:20 UTC] PHP   4. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-load.php:37
+[04-Feb-2020 22:50:20 UTC] PHP   5. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-config.php:77
+[04-Feb-2020 22:50:20 UTC] PHP   6. include() /Users/samhudson/Local Sites/fake-university/app/public/wp-settings.php:499
+[04-Feb-2020 22:50:20 UTC] PHP Fatal error:  Cannot redeclare universitySearchResults() (previously declared in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/mu-plugins/university-post-types.php:12) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 13
+[04-Feb-2020 22:50:20 UTC] PHP Stack trace:
+[04-Feb-2020 22:50:20 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/post.php:0
+[04-Feb-2020 22:50:20 UTC] PHP   2. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/post.php:12
+[04-Feb-2020 22:50:20 UTC] PHP   3. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/admin.php:34
+[04-Feb-2020 22:50:20 UTC] PHP   4. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-load.php:37
+[04-Feb-2020 22:50:20 UTC] PHP   5. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-config.php:77
+[04-Feb-2020 22:50:20 UTC] PHP   6. include() /Users/samhudson/Local Sites/fake-university/app/public/wp-settings.php:499
+[04-Feb-2020 22:50:21 UTC] PHP Fatal error:  Cannot redeclare universitySearchResults() (previously declared in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/mu-plugins/university-post-types.php:12) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 13
+[04-Feb-2020 22:50:21 UTC] PHP Stack trace:
+[04-Feb-2020 22:50:21 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/admin-ajax.php:0
+[04-Feb-2020 22:50:21 UTC] PHP   2. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/admin-ajax.php:22
+[04-Feb-2020 22:50:21 UTC] PHP   3. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-load.php:37
+[04-Feb-2020 22:50:21 UTC] PHP   4. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-config.php:77
+[04-Feb-2020 22:50:21 UTC] PHP   5. include() /Users/samhudson/Local Sites/fake-university/app/public/wp-settings.php:499
+[04-Feb-2020 22:50:35 UTC] PHP Fatal error:  Cannot redeclare universitySearchResults() (previously declared in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/mu-plugins/university-post-types.php:12) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 13
+[04-Feb-2020 22:50:35 UTC] PHP Stack trace:
+[04-Feb-2020 22:50:35 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/index.php:0
+[04-Feb-2020 22:50:35 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
+[04-Feb-2020 22:50:35 UTC] PHP   3. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:13
+[04-Feb-2020 22:50:35 UTC] PHP   4. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-load.php:37
+[04-Feb-2020 22:50:35 UTC] PHP   5. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-config.php:77
+[04-Feb-2020 22:50:35 UTC] PHP   6. include() /Users/samhudson/Local Sites/fake-university/app/public/wp-settings.php:499
+[04-Feb-2020 22:50:35 UTC] PHP Fatal error:  Cannot redeclare universitySearchResults() (previously declared in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/mu-plugins/university-post-types.php:12) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 13
+[04-Feb-2020 22:50:35 UTC] PHP Stack trace:
+[04-Feb-2020 22:50:35 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/post.php:0
+[04-Feb-2020 22:50:35 UTC] PHP   2. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/post.php:12
+[04-Feb-2020 22:50:35 UTC] PHP   3. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/admin.php:34
+[04-Feb-2020 22:50:35 UTC] PHP   4. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-load.php:37
+[04-Feb-2020 22:50:35 UTC] PHP   5. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-config.php:77
+[04-Feb-2020 22:50:35 UTC] PHP   6. include() /Users/samhudson/Local Sites/fake-university/app/public/wp-settings.php:499
+[04-Feb-2020 22:50:53 UTC] PHP Fatal error:  Cannot redeclare universitySearchResults() (previously declared in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/mu-plugins/university-post-types.php:12) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 13
+[04-Feb-2020 22:50:53 UTC] PHP Stack trace:
+[04-Feb-2020 22:50:53 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/post.php:0
+[04-Feb-2020 22:50:53 UTC] PHP   2. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/post.php:12
+[04-Feb-2020 22:50:53 UTC] PHP   3. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/admin.php:34
+[04-Feb-2020 22:50:53 UTC] PHP   4. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-load.php:37
+[04-Feb-2020 22:50:53 UTC] PHP   5. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-config.php:77
+[04-Feb-2020 22:50:53 UTC] PHP   6. include() /Users/samhudson/Local Sites/fake-university/app/public/wp-settings.php:499
+[04-Feb-2020 22:50:54 UTC] PHP Fatal error:  Cannot redeclare universitySearchResults() (previously declared in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/mu-plugins/university-post-types.php:12) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 13
+[04-Feb-2020 22:50:54 UTC] PHP Stack trace:
+[04-Feb-2020 22:50:54 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/index.php:0
+[04-Feb-2020 22:50:54 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
+[04-Feb-2020 22:50:54 UTC] PHP   3. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:13
+[04-Feb-2020 22:50:54 UTC] PHP   4. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-load.php:37
+[04-Feb-2020 22:50:54 UTC] PHP   5. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-config.php:77
+[04-Feb-2020 22:50:54 UTC] PHP   6. include() /Users/samhudson/Local Sites/fake-university/app/public/wp-settings.php:499
+[04-Feb-2020 22:50:59 UTC] PHP Fatal error:  Cannot redeclare universitySearchResults() (previously declared in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/mu-plugins/university-post-types.php:12) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 13
+[04-Feb-2020 22:50:59 UTC] PHP Stack trace:
+[04-Feb-2020 22:50:59 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/post.php:0
+[04-Feb-2020 22:50:59 UTC] PHP   2. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/post.php:12
+[04-Feb-2020 22:50:59 UTC] PHP   3. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/admin.php:34
+[04-Feb-2020 22:50:59 UTC] PHP   4. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-load.php:37
+[04-Feb-2020 22:50:59 UTC] PHP   5. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-config.php:77
+[04-Feb-2020 22:50:59 UTC] PHP   6. include() /Users/samhudson/Local Sites/fake-university/app/public/wp-settings.php:499
+[04-Feb-2020 22:50:59 UTC] PHP Fatal error:  Cannot redeclare universitySearchResults() (previously declared in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/mu-plugins/university-post-types.php:12) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 13
+[04-Feb-2020 22:50:59 UTC] PHP Stack trace:
+[04-Feb-2020 22:50:59 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/index.php:0
+[04-Feb-2020 22:50:59 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
+[04-Feb-2020 22:50:59 UTC] PHP   3. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:13
+[04-Feb-2020 22:50:59 UTC] PHP   4. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-load.php:37
+[04-Feb-2020 22:50:59 UTC] PHP   5. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-config.php:77
+[04-Feb-2020 22:50:59 UTC] PHP   6. include() /Users/samhudson/Local Sites/fake-university/app/public/wp-settings.php:499
+[04-Feb-2020 22:51:25 UTC] PHP Fatal error:  Cannot redeclare universityRegisterSearch() (previously declared in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/mu-plugins/university-post-types.php:5) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 11
+[04-Feb-2020 22:51:25 UTC] PHP Stack trace:
+[04-Feb-2020 22:51:25 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/post.php:0
+[04-Feb-2020 22:51:25 UTC] PHP   2. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/post.php:12
+[04-Feb-2020 22:51:25 UTC] PHP   3. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/admin.php:34
+[04-Feb-2020 22:51:25 UTC] PHP   4. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-load.php:37
+[04-Feb-2020 22:51:25 UTC] PHP   5. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-config.php:77
+[04-Feb-2020 22:51:25 UTC] PHP   6. include() /Users/samhudson/Local Sites/fake-university/app/public/wp-settings.php:499
+[04-Feb-2020 22:51:26 UTC] PHP Fatal error:  Cannot redeclare universitySearchResults() (previously declared in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/mu-plugins/university-post-types.php:12) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 13
+[04-Feb-2020 22:51:26 UTC] PHP Stack trace:
+[04-Feb-2020 22:51:26 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/index.php:0
+[04-Feb-2020 22:51:26 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
+[04-Feb-2020 22:51:26 UTC] PHP   3. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:13
+[04-Feb-2020 22:51:26 UTC] PHP   4. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-load.php:37
+[04-Feb-2020 22:51:26 UTC] PHP   5. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-config.php:77
+[04-Feb-2020 22:51:26 UTC] PHP   6. include() /Users/samhudson/Local Sites/fake-university/app/public/wp-settings.php:499
+[04-Feb-2020 22:51:35 UTC] PHP Fatal error:  Cannot redeclare universitySearchResults() (previously declared in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/mu-plugins/university-post-types.php:12) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 13
+[04-Feb-2020 22:51:35 UTC] PHP Stack trace:
+[04-Feb-2020 22:51:35 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/post.php:0
+[04-Feb-2020 22:51:35 UTC] PHP   2. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/post.php:12
+[04-Feb-2020 22:51:35 UTC] PHP   3. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/admin.php:34
+[04-Feb-2020 22:51:35 UTC] PHP   4. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-load.php:37
+[04-Feb-2020 22:51:35 UTC] PHP   5. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-config.php:77
+[04-Feb-2020 22:51:35 UTC] PHP   6. include() /Users/samhudson/Local Sites/fake-university/app/public/wp-settings.php:499
+[04-Feb-2020 22:51:35 UTC] PHP Fatal error:  Cannot redeclare universitySearchResults() (previously declared in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/mu-plugins/university-post-types.php:12) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 13
+[04-Feb-2020 22:51:35 UTC] PHP Stack trace:
+[04-Feb-2020 22:51:35 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/index.php:0
+[04-Feb-2020 22:51:35 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
+[04-Feb-2020 22:51:35 UTC] PHP   3. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:13
+[04-Feb-2020 22:51:35 UTC] PHP   4. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-load.php:37
+[04-Feb-2020 22:51:35 UTC] PHP   5. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-config.php:77
+[04-Feb-2020 22:51:35 UTC] PHP   6. include() /Users/samhudson/Local Sites/fake-university/app/public/wp-settings.php:499
+[04-Feb-2020 22:51:39 UTC] PHP Fatal error:  Cannot redeclare universitySearchResults() (previously declared in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/mu-plugins/university-post-types.php:12) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 13
+[04-Feb-2020 22:51:39 UTC] PHP Stack trace:
+[04-Feb-2020 22:51:39 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/post.php:0
+[04-Feb-2020 22:51:39 UTC] PHP   2. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/post.php:12
+[04-Feb-2020 22:51:39 UTC] PHP   3. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/admin.php:34
+[04-Feb-2020 22:51:39 UTC] PHP   4. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-load.php:37
+[04-Feb-2020 22:51:39 UTC] PHP   5. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-config.php:77
+[04-Feb-2020 22:51:39 UTC] PHP   6. include() /Users/samhudson/Local Sites/fake-university/app/public/wp-settings.php:499
+[04-Feb-2020 22:51:40 UTC] PHP Fatal error:  Cannot redeclare universitySearchResults() (previously declared in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/mu-plugins/university-post-types.php:12) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 13
+[04-Feb-2020 22:51:40 UTC] PHP Stack trace:
+[04-Feb-2020 22:51:40 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/index.php:0
+[04-Feb-2020 22:51:40 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
+[04-Feb-2020 22:51:40 UTC] PHP   3. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:13
+[04-Feb-2020 22:51:40 UTC] PHP   4. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-load.php:37
+[04-Feb-2020 22:51:40 UTC] PHP   5. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-config.php:77
+[04-Feb-2020 22:51:40 UTC] PHP   6. include() /Users/samhudson/Local Sites/fake-university/app/public/wp-settings.php:499
+[04-Feb-2020 22:51:51 UTC] PHP Fatal error:  Cannot redeclare universitySearchResults() (previously declared in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/mu-plugins/university-post-types.php:12) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 13
+[04-Feb-2020 22:51:51 UTC] PHP Stack trace:
+[04-Feb-2020 22:51:51 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/post.php:0
+[04-Feb-2020 22:51:51 UTC] PHP   2. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/post.php:12
+[04-Feb-2020 22:51:51 UTC] PHP   3. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-admin/admin.php:34
+[04-Feb-2020 22:51:51 UTC] PHP   4. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-load.php:37
+[04-Feb-2020 22:51:51 UTC] PHP   5. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-config.php:77
+[04-Feb-2020 22:51:51 UTC] PHP   6. include() /Users/samhudson/Local Sites/fake-university/app/public/wp-settings.php:499
+[04-Feb-2020 22:51:52 UTC] PHP Fatal error:  Cannot redeclare universitySearchResults() (previously declared in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/mu-plugins/university-post-types.php:12) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 13
+[04-Feb-2020 22:51:52 UTC] PHP Stack trace:
+[04-Feb-2020 22:51:52 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/index.php:0
+[04-Feb-2020 22:51:52 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
+[04-Feb-2020 22:51:52 UTC] PHP   3. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:13
+[04-Feb-2020 22:51:52 UTC] PHP   4. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-load.php:37
+[04-Feb-2020 22:51:52 UTC] PHP   5. require_once() /Users/samhudson/Local Sites/fake-university/app/public/wp-config.php:77
+[04-Feb-2020 22:51:52 UTC] PHP   6. include() /Users/samhudson/Local Sites/fake-university/app/public/wp-settings.php:499
+[04-Feb-2020 22:53:29 UTC] PHP Fatal error:  Uncaught Exception: DateTime::__construct(): Failed to parse time string (30/11/2019) at position 0 (3): Unexpected character in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php:62
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php(62): DateTime->__construct('30/11/2019')
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php(946): universitySearchResults(Object(WP_REST_Request))
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php(329): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#3 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php(309): WP_REST_Server->serve_request('/university/v1/...')
+#4 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php(286): rest_api_loaded(Object(WP))
+#5 /Users/samhudson/Local in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 62
+[04-Feb-2020 22:53:42 UTC] PHP Fatal error:  Uncaught Exception: DateTime::__construct(): Failed to parse time string (16/04/2020) at position 0 (1): Unexpected character in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php:62
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php(62): DateTime->__construct('16/04/2020')
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php(946): universitySearchResults(Object(WP_REST_Request))
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php(329): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#3 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php(309): WP_REST_Server->serve_request('/university/v1/...')
+#4 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php(286): rest_api_loaded(Object(WP))
+#5 /Users/samhudson/Local in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 62
+[04-Feb-2020 22:53:47 UTC] PHP Fatal error:  Uncaught Exception: DateTime::__construct(): Failed to parse time string (17/09/2019) at position 0 (1): Unexpected character in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php:62
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php(62): DateTime->__construct('17/09/2019')
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php(946): universitySearchResults(Object(WP_REST_Request))
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php(329): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#3 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php(309): WP_REST_Server->serve_request('/university/v1/...')
+#4 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php(286): rest_api_loaded(Object(WP))
+#5 /Users/samhudson/Local in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 62
+[04-Feb-2020 22:54:02 UTC] PHP Fatal error:  Uncaught Exception: DateTime::__construct(): Failed to parse time string (16/04/2020) at position 0 (1): Unexpected character in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php:62
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php(62): DateTime->__construct('16/04/2020')
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php(946): universitySearchResults(Object(WP_REST_Request))
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php(329): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#3 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php(309): WP_REST_Server->serve_request('/university/v1/...')
+#4 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php(286): rest_api_loaded(Object(WP))
+#5 /Users/samhudson/Local in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 62
+[04-Feb-2020 22:54:03 UTC] PHP Fatal error:  Uncaught Exception: DateTime::__construct(): Failed to parse time string (16/04/2020) at position 0 (1): Unexpected character in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php:62
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php(62): DateTime->__construct('16/04/2020')
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php(946): universitySearchResults(Object(WP_REST_Request))
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php(329): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#3 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php(309): WP_REST_Server->serve_request('/university/v1/...')
+#4 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php(286): rest_api_loaded(Object(WP))
+#5 /Users/samhudson/Local in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 62
+[04-Feb-2020 22:54:38 UTC] PHP Fatal error:  Uncaught Exception: DateTime::__construct(): Failed to parse time string (16/04/2020) at position 0 (1): Unexpected character in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php:62
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php(62): DateTime->__construct('16/04/2020')
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php(946): universitySearchResults(Object(WP_REST_Request))
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php(329): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#3 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php(309): WP_REST_Server->serve_request('/university/v1/...')
+#4 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php(286): rest_api_loaded(Object(WP))
+#5 /Users/samhudson/Local in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 62
+[04-Feb-2020 22:54:44 UTC] PHP Fatal error:  Uncaught Exception: DateTime::__construct(): Failed to parse time string (17/09/2019) at position 0 (1): Unexpected character in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php:62
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php(62): DateTime->__construct('17/09/2019')
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php(946): universitySearchResults(Object(WP_REST_Request))
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php(329): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#3 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php(309): WP_REST_Server->serve_request('/university/v1/...')
+#4 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php(286): rest_api_loaded(Object(WP))
+#5 /Users/samhudson/Local in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 62
+[04-Feb-2020 22:54:48 UTC] PHP Fatal error:  Uncaught Exception: DateTime::__construct(): Failed to parse time string (30/11/2019) at position 0 (3): Unexpected character in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php:62
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php(62): DateTime->__construct('30/11/2019')
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php(946): universitySearchResults(Object(WP_REST_Request))
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php(329): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#3 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php(309): WP_REST_Server->serve_request('/university/v1/...')
+#4 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php(286): rest_api_loaded(Object(WP))
+#5 /Users/samhudson/Local in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 62
+[04-Feb-2020 23:02:42 UTC] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 118
+[04-Feb-2020 23:02:43 UTC] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 118
+[04-Feb-2020 23:02:43 UTC] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 118
+[04-Feb-2020 23:03:21 UTC] PHP Parse error:  syntax error, unexpected end of file in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 116
+[04-Feb-2020 23:03:22 UTC] PHP Parse error:  syntax error, unexpected end of file in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 116
+[04-Feb-2020 23:03:22 UTC] PHP Parse error:  syntax error, unexpected end of file in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 116
+[04-Feb-2020 23:04:03 UTC] PHP Fatal error:  Uncaught Exception: DateTime::__construct(): Failed to parse time string (16/04/2020) at position 0 (1): Unexpected character in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php:62
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php(62): DateTime->__construct('16/04/2020')
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php(946): universitySearchResults(Object(WP_REST_Request))
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php(329): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#3 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php(309): WP_REST_Server->serve_request('/university/v1/...')
+#4 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php(286): rest_api_loaded(Object(WP))
+#5 /Users/samhudson/Local in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 62
+[04-Feb-2020 23:04:04 UTC] PHP Fatal error:  Uncaught Exception: DateTime::__construct(): Failed to parse time string (16/04/2020) at position 0 (1): Unexpected character in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php:62
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php(62): DateTime->__construct('16/04/2020')
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php(946): universitySearchResults(Object(WP_REST_Request))
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php(329): WP_REST_Server->dispatch(Object(WP_REST_Request))
+#3 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php(309): WP_REST_Server->serve_request('/university/v1/...')
+#4 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php(286): rest_api_loaded(Object(WP))
+#5 /Users/samhudson/Local in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 62
