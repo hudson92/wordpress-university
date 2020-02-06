@@ -450,3 +450,27 @@ Stack trace:
 #3 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php(309): WP_REST_Server->serve_request('/university/v1/...')
 #4 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php(286): rest_api_loaded(Object(WP))
 #5 /Users/samhudson/Local in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 62
+[06-Feb-2020 22:26:09 UTC] PHP Parse error:  syntax error, unexpected ')' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/header.php on line 27
+[06-Feb-2020 22:26:42 UTC] PHP Parse error:  syntax error, unexpected ')' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/header.php on line 27
+[06-Feb-2020 22:27:40 UTC] PHP Parse error:  syntax error, unexpected ')' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/header.php on line 27
+[06-Feb-2020 22:27:47 UTC] PHP Parse error:  syntax error, unexpected ')' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/header.php on line 27
+[06-Feb-2020 22:27:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function is_logged_in() in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/header.php:25
+Stack trace:
+#0 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template.php(722): require_once()
+#1 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template.php(671): load_template('/Users/samhudso...', true)
+#2 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/general-template.php(41): locate_template(Array, true)
+#3 /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/front-page.php(2): get_header()
+#4 /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/template-loader.php(78): include('/Users/samhudso...')
+#5 /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php(19): require_once('/Users/samhudso...')
+#6 /Users/samhudson/Local Sites/fake-university/app/public/index.php(17): require('/Users/samhudso...')
+#7 {main in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/header.php on line 25
+[06-Feb-2020 22:36:47 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 108
+[06-Feb-2020 22:36:48 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 108
+[06-Feb-2020 22:36:48 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 108
+[06-Feb-2020 22:36:53 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 108
+[06-Feb-2020 22:36:55 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 108
+[06-Feb-2020 22:37:28 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 109
+[06-Feb-2020 22:37:28 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 109
+[06-Feb-2020 22:52:43 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 145
+[06-Feb-2020 22:52:44 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 145
+[06-Feb-2020 22:52:44 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 145
