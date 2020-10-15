@@ -1,0 +1,146 @@
+[10-Mar-2020 21:50:44 UTC] WordPress database error Duplicate column name 'settings' for query ALTER TABLE wp_ninja_table_items ADD COLUMN `settings` LONGTEXT AFTER `value`; made by do_action('wp_ajax_ninja_tables_ajax_actions'), WP_Hook->do_action, WP_Hook->apply_filters, NinjaTablesAdmin->ajax_routes, NinjaTablesAdmin->getTableSettings, NinjaTablesAdmin->checkDBMigrations, NinjaTablesAdmin->migrateSettingColumnIfNeeded
+[10-Mar-2020 21:50:44 UTC] WordPress database error Duplicate column name 'owner_id' for query ALTER TABLE wp_ninja_table_items ADD COLUMN `owner_id` int(11) AFTER `table_id`; made by do_action('wp_ajax_ninja_tables_ajax_actions'), WP_Hook->do_action, WP_Hook->apply_filters, NinjaTablesAdmin->ajax_routes, NinjaTablesAdmin->getTableSettings, NinjaTablesAdmin->checkDBMigrations, NinjaTablesAdmin->migrateOwnerColumnIfNeeded
+[11-Mar-2020 22:03:40 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wp_regisration_url() in /Users/samhudson/Local Sites/tricoach/app/public/wp-content/themes/tri-coach/header.php:109
+Stack trace:
+#0 /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/template.php(722): require_once()
+#1 /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/template.php(671): load_template('/Users/samhudso...', true)
+#2 /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/general-template.php(41): locate_template(Array, true)
+#3 /Users/samhudson/Local Sites/tricoach/app/public/wp-content/themes/getwid-base/template-front-page.php(8): get_header()
+#4 /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/template-loader.php(98): include('/Users/samhudso...')
+#5 /Users/samhudson/Local Sites/tricoach/app/public/wp-blog-header.php(19): require_once('/Users/samhudso...')
+#6 /Users/samhudson/Local Sites/tricoach/app/public/index.php(17): require('/Users/samhudso...')
+#7 {main}
+  thrown in /Users/samhudson/Local Sites/tricoach/app/public/wp-content/themes/tri-coach/header.php on line 109
+[11-Mar-2020 22:04:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wp_regisration_url() in /Users/samhudson/Local Sites/tricoach/app/public/wp-content/themes/tri-coach/header.php:109
+Stack trace:
+#0 /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/template.php(722): require_once()
+#1 /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/template.php(671): load_template('/Users/samhudso...', true)
+#2 /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/general-template.php(41): locate_template(Array, true)
+#3 /Users/samhudson/Local Sites/tricoach/app/public/wp-content/themes/getwid-base/template-front-page.php(8): get_header()
+#4 /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/template-loader.php(98): include('/Users/samhudso...')
+#5 /Users/samhudson/Local Sites/tricoach/app/public/wp-blog-header.php(19): require_once('/Users/samhudso...')
+#6 /Users/samhudson/Local Sites/tricoach/app/public/index.php(17): require('/Users/samhudso...')
+#7 {main}
+  thrown in /Users/samhudson/Local Sites/tricoach/app/public/wp-content/themes/tri-coach/header.php on line 109
+[23-Mar-2020 22:24:02 UTC] WordPress database error Server shutdown in progress for query SELECT option_value FROM wp_options WHERE option_name = 'user_registration_email_setting_disable_email' LIMIT 1 made by include('phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/php/boot-phar.php'), include('phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/vendor/wp-cli/wp-cli/php/wp-cli.php'), WP_CLI\bootstrap, WP_CLI\Bootstrap\LaunchRunner->process, WP_CLI\Runner->start, WP_CLI\Runner->load_wordpress, require('wp-settings.php'), include_once('/plugins/user-registration/user-registration.php'), UR, UserRegistration::instance, UserRegistration->__construct, UserRegistration->includes, include_once('/plugins/user-registration/includes/class-ur-emailer.php'), UR_Emailer::init, get_option
+[23-Mar-2020 22:24:02 UTC] WordPress database error Server shutdown in progress for query SELECT option_value FROM wp_options WHERE option_name = 'user_registration_email_setting_disable_email' LIMIT 1 made by include('phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/php/boot-phar.php'), include('phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/vendor/wp-cli/wp-cli/php/wp-cli.php'), WP_CLI\bootstrap, WP_CLI\Bootstrap\LaunchRunner->process, WP_CLI\Runner->start, WP_CLI\Runner->load_wordpress, require('wp-settings.php'), include_once('/plugins/user-registration/user-registration.php'), UR, UserRegistration::instance, UserRegistration->__construct, UserRegistration->includes, include_once('/plugins/user-registration/includes/class-ur-emailer.php'), UR_Emailer::init, get_option
+[23-Mar-2020 22:24:02 UTC] WordPress database error Server shutdown in progress for query SELECT option_value FROM wp_options WHERE option_name = 'user_registration_email_setting_disable_email' LIMIT 1 made by include('phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/php/boot-phar.php'), include('phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/vendor/wp-cli/wp-cli/php/wp-cli.php'), WP_CLI\bootstrap, WP_CLI\Bootstrap\LaunchRunner->process, WP_CLI\Runner->start, WP_CLI\Runner->load_wordpress, require('wp-settings.php'), include_once('/plugins/user-registration/user-registration.php'), UR, UserRegistration::instance, UserRegistration->__construct, UserRegistration->includes, include_once('/plugins/user-registration/includes/class-ur-emailer.php'), UR_Emailer::init, get_option
+[23-Mar-2020 22:24:03 UTC] PHP Warning:  Error while sending QUERY packet. PID=70343 in /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/wp-db.php on line 2030
+[23-Mar-2020 22:24:03 UTC] PHP Stack trace:
+[23-Mar-2020 22:24:03 UTC] PHP   1. {main}() /Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar:0
+[23-Mar-2020 22:24:03 UTC] PHP   2. include() /Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar:4
+[23-Mar-2020 22:24:03 UTC] PHP Warning:  Error while sending QUERY packet. PID=70346 in /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/wp-db.php on line 2030
+[23-Mar-2020 22:24:03 UTC] PHP   3. include() phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/php/boot-phar.php:11
+[23-Mar-2020 22:24:03 UTC] PHP Stack trace:
+[23-Mar-2020 22:24:03 UTC] PHP   1. {main}() /Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar:0
+[23-Mar-2020 22:24:03 UTC] PHP   4. WP_CLI\bootstrap() phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/vendor/wp-cli/wp-cli/php/wp-cli.php:27
+[23-Mar-2020 22:24:03 UTC] PHP   5. WP_CLI\Bootstrap\LaunchRunner->process() phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/vendor/wp-cli/wp-cli/php/bootstrap.php:74
+[23-Mar-2020 22:24:03 UTC] PHP   2. include() /Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar:4
+[23-Mar-2020 22:24:03 UTC] PHP   6. WP_CLI\Runner->start() phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/vendor/wp-cli/wp-cli/php/WP_CLI/Bootstrap/LaunchRunner.php:23
+[23-Mar-2020 22:24:03 UTC] PHP   3. include() phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/php/boot-phar.php:11
+[23-Mar-2020 22:24:03 UTC] PHP   7. WP_CLI\Runner->load_wordpress() phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/vendor/wp-cli/wp-cli/php/WP_CLI/Runner.php:1158
+[23-Mar-2020 22:24:03 UTC] PHP   4. WP_CLI\bootstrap() phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/vendor/wp-cli/wp-cli/php/wp-cli.php:27
+[23-Mar-2020 22:24:03 UTC] PHP   8. require() phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/vendor/wp-cli/wp-cli/php/WP_CLI/Runner.php:1237
+[23-Mar-2020 22:24:03 UTC] PHP   5. WP_CLI\Bootstrap\LaunchRunner->process() phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/vendor/wp-cli/wp-cli/php/bootstrap.php:74
+[23-Mar-2020 22:24:03 UTC] PHP   9. do_action() /Users/samhudson/Local Sites/tricoach/app/public/wp-settings.php:523
+[23-Mar-2020 22:24:03 UTC] PHP   6. WP_CLI\Runner->start() phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/vendor/wp-cli/wp-cli/php/WP_CLI/Bootstrap/LaunchRunner.php:23
+[23-Mar-2020 22:24:03 UTC] PHP  10. WP_Hook->do_action() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/plugin.php:478
+[23-Mar-2020 22:24:03 UTC] PHP   7. WP_CLI\Runner->load_wordpress() phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/vendor/wp-cli/wp-cli/php/WP_CLI/Runner.php:1158
+[23-Mar-2020 22:24:03 UTC] PHP   8. require() phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/vendor/wp-cli/wp-cli/php/WP_CLI/Runner.php:1237
+[23-Mar-2020 22:24:03 UTC] PHP  11. WP_Hook->apply_filters() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-hook.php:312
+[23-Mar-2020 22:24:03 UTC] PHP   9. do_action() /Users/samhudson/Local Sites/tricoach/app/public/wp-settings.php:523
+[23-Mar-2020 22:24:03 UTC] PHP  10. WP_Hook->do_action() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/plugin.php:478
+[23-Mar-2020 22:24:03 UTC] PHP  12. wp_widgets_init() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-hook.php:288
+[23-Mar-2020 22:24:03 UTC] PHP  11. WP_Hook->apply_filters() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-hook.php:312
+[23-Mar-2020 22:24:03 UTC] PHP  13. do_action() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/widgets.php:1765
+[23-Mar-2020 22:24:03 UTC] PHP  12. wp_widgets_init() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-hook.php:288
+[23-Mar-2020 22:24:03 UTC] PHP  13. do_action() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/widgets.php:1765
+[23-Mar-2020 22:24:03 UTC] PHP  14. WP_Hook->do_action() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/plugin.php:478
+[23-Mar-2020 22:24:03 UTC] PHP  14. WP_Hook->do_action() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/plugin.php:478
+[23-Mar-2020 22:24:03 UTC] PHP  15. WP_Hook->apply_filters() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-hook.php:312
+[23-Mar-2020 22:24:03 UTC] PHP  15. WP_Hook->apply_filters() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-hook.php:312
+[23-Mar-2020 22:24:03 UTC] PHP  16. WP_Widget_Factory->_register_widgets() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-hook.php:288
+[23-Mar-2020 22:24:03 UTC] PHP  17. WP_Widget_Text->_register() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-widget-factory.php:112
+[23-Mar-2020 22:24:03 UTC] PHP  18. WP_Widget_Text->_register_one() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-widget.php:251
+[23-Mar-2020 22:24:03 UTC] PHP  19. wp_add_inline_script() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/widgets/class-wp-widget-text.php:58
+[23-Mar-2020 22:24:03 UTC] PHP  20. wp_scripts() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/functions.wp-scripts.php:128
+[23-Mar-2020 22:24:03 UTC] PHP  21. WP_Scripts->__construct() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/functions.wp-scripts.php:23
+[23-Mar-2020 22:24:03 UTC] PHP  16. WP_Widget_Factory->_register_widgets() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-hook.php:288
+[23-Mar-2020 22:24:03 UTC] PHP  22. WP_Scripts->init() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class.wp-scripts.php:142
+[23-Mar-2020 22:24:03 UTC] PHP  17. WP_Widget_Text->_register() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-widget-factory.php:112
+[23-Mar-2020 22:24:03 UTC] PHP  23. do_action_ref_array() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class.wp-scripts.php:167
+[23-Mar-2020 22:24:03 UTC] PHP  18. WP_Widget_Text->_register_one() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-widget.php:251
+[23-Mar-2020 22:24:03 UTC] PHP  24. WP_Hook->do_action() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/plugin.php:544
+[23-Mar-2020 22:24:03 UTC] PHP  19. wp_add_inline_script() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/widgets/class-wp-widget-text.php:58
+[23-Mar-2020 22:24:03 UTC] PHP  25. WP_Hook->apply_filters() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-hook.php:312
+[23-Mar-2020 22:24:03 UTC] PHP  20. wp_scripts() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/functions.wp-scripts.php:128
+[23-Mar-2020 22:24:03 UTC] PHP  21. WP_Scripts->__construct() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/functions.wp-scripts.php:23
+[23-Mar-2020 22:24:03 UTC] PHP  22. WP_Scripts->init() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class.wp-scripts.php:142
+[23-Mar-2020 22:24:03 UTC] PHP  23. do_action_ref_array() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class.wp-scripts.php:167
+[23-Mar-2020 22:24:03 UTC] PHP  26. wp_default_packages() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-hook.php:288
+[23-Mar-2020 22:24:03 UTC] PHP  24. WP_Hook->do_action() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/plugin.php:544
+[23-Mar-2020 22:24:03 UTC] PHP  25. WP_Hook->apply_filters() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-hook.php:312
+[23-Mar-2020 22:24:03 UTC] PHP Warning:  Error while sending QUERY packet. PID=70344 in /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/wp-db.php on line 2030
+[23-Mar-2020 22:24:03 UTC] PHP  27. wp_register_tinymce_scripts() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/script-loader.php:896
+[23-Mar-2020 22:24:03 UTC] PHP  26. wp_default_packages() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-hook.php:288
+[23-Mar-2020 22:24:03 UTC] PHP Stack trace:
+[23-Mar-2020 22:24:03 UTC] PHP  27. wp_register_tinymce_scripts() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/script-loader.php:896
+[23-Mar-2020 22:24:03 UTC] PHP  28. script_concat_settings() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/script-loader.php:49
+[23-Mar-2020 22:24:03 UTC] PHP  28. script_concat_settings() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/script-loader.php:49
+[23-Mar-2020 22:24:03 UTC] PHP   1. {main}() /Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar:0
+[23-Mar-2020 22:24:03 UTC] PHP  29. get_site_option() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/script-loader.php:2812
+[23-Mar-2020 22:24:03 UTC] PHP  29. get_site_option() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/script-loader.php:2812
+[23-Mar-2020 22:24:03 UTC] PHP  30. get_network_option() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/option.php:1154
+[23-Mar-2020 22:24:03 UTC] PHP   2. include() /Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar:4
+[23-Mar-2020 22:24:03 UTC] PHP  30. get_network_option() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/option.php:1154
+[23-Mar-2020 22:24:03 UTC] PHP  31. get_option() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/option.php:1289
+[23-Mar-2020 22:24:03 UTC] PHP  31. get_option() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/option.php:1289
+[23-Mar-2020 22:24:03 UTC] PHP   3. include() phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/php/boot-phar.php:11
+[23-Mar-2020 22:24:03 UTC] PHP  32. wpdb->get_row() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/option.php:100
+[23-Mar-2020 22:24:03 UTC] PHP   4. WP_CLI\bootstrap() phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/vendor/wp-cli/wp-cli/php/wp-cli.php:27
+[23-Mar-2020 22:24:03 UTC] PHP  32. wpdb->get_row() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/option.php:100
+[23-Mar-2020 22:24:03 UTC] PHP  33. wpdb->query() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/wp-db.php:2569
+[23-Mar-2020 22:24:03 UTC] PHP   5. WP_CLI\Bootstrap\LaunchRunner->process() phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/vendor/wp-cli/wp-cli/php/bootstrap.php:74
+[23-Mar-2020 22:24:03 UTC] PHP  33. wpdb->query() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/wp-db.php:2569
+[23-Mar-2020 22:24:03 UTC] PHP  34. wpdb->_do_query() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/wp-db.php:1918
+[23-Mar-2020 22:24:03 UTC] PHP   6. WP_CLI\Runner->start() phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/vendor/wp-cli/wp-cli/php/WP_CLI/Bootstrap/LaunchRunner.php:23
+[23-Mar-2020 22:24:03 UTC] PHP  34. wpdb->_do_query() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/wp-db.php:1918
+[23-Mar-2020 22:24:03 UTC] PHP  35. mysqli_query() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/wp-db.php:2030
+[23-Mar-2020 22:24:03 UTC] PHP   7. WP_CLI\Runner->load_wordpress() phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/vendor/wp-cli/wp-cli/php/WP_CLI/Runner.php:1158
+[23-Mar-2020 22:24:03 UTC] PHP  35. mysqli_query() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/wp-db.php:2030
+[23-Mar-2020 22:24:03 UTC] PHP   8. require() phar:///Applications/Local.app/Contents/Resources/extraResources/bin/wp-cli/wp-cli.phar/vendor/wp-cli/wp-cli/php/WP_CLI/Runner.php:1237
+[23-Mar-2020 22:24:03 UTC] PHP   9. do_action() /Users/samhudson/Local Sites/tricoach/app/public/wp-settings.php:523
+[23-Mar-2020 22:24:03 UTC] PHP  10. WP_Hook->do_action() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/plugin.php:478
+[23-Mar-2020 22:24:03 UTC] PHP  11. WP_Hook->apply_filters() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-hook.php:312
+[23-Mar-2020 22:24:03 UTC] PHP  12. wp_widgets_init() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-hook.php:288
+[23-Mar-2020 22:24:03 UTC] PHP  13. do_action() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/widgets.php:1765
+[23-Mar-2020 22:24:03 UTC] PHP  14. WP_Hook->do_action() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/plugin.php:478
+[23-Mar-2020 22:24:03 UTC] PHP  15. WP_Hook->apply_filters() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-hook.php:312
+[23-Mar-2020 22:24:03 UTC] PHP  16. WP_Widget_Factory->_register_widgets() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-hook.php:288
+[23-Mar-2020 22:24:03 UTC] PHP  17. WP_Widget_Text->_register() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-widget-factory.php:112
+[23-Mar-2020 22:24:03 UTC] PHP  18. WP_Widget_Text->_register_one() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-widget.php:251
+[23-Mar-2020 22:24:03 UTC] PHP  19. wp_add_inline_script() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/widgets/class-wp-widget-text.php:58
+[23-Mar-2020 22:24:03 UTC] PHP  20. wp_scripts() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/functions.wp-scripts.php:128
+[23-Mar-2020 22:24:03 UTC] PHP  21. WP_Scripts->__construct() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/functions.wp-scripts.php:23
+[23-Mar-2020 22:24:03 UTC] PHP  22. WP_Scripts->init() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class.wp-scripts.php:142
+[23-Mar-2020 22:24:03 UTC] PHP  23. do_action_ref_array() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class.wp-scripts.php:167
+[23-Mar-2020 22:24:03 UTC] PHP  24. WP_Hook->do_action() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/plugin.php:544
+[23-Mar-2020 22:24:03 UTC] PHP  25. WP_Hook->apply_filters() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-hook.php:312
+[23-Mar-2020 22:24:03 UTC] PHP  26. wp_default_packages() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/class-wp-hook.php:288
+[23-Mar-2020 22:24:03 UTC] PHP  27. wp_register_tinymce_scripts() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/script-loader.php:896
+[23-Mar-2020 22:24:03 UTC] PHP  28. script_concat_settings() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/script-loader.php:49
+[23-Mar-2020 22:24:03 UTC] PHP  29. get_site_option() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/script-loader.php:2812
+[23-Mar-2020 22:24:03 UTC] PHP  30. get_network_option() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/option.php:1154
+[23-Mar-2020 22:24:03 UTC] PHP  31. get_option() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/option.php:1289
+[23-Mar-2020 22:24:03 UTC] PHP  32. wpdb->get_row() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/option.php:100
+[23-Mar-2020 22:24:03 UTC] PHP  33. wpdb->query() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/wp-db.php:2569
+[23-Mar-2020 22:24:03 UTC] PHP  34. wpdb->_do_query() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/wp-db.php:1918
+[23-Mar-2020 22:24:03 UTC] PHP  35. mysqli_query() /Users/samhudson/Local Sites/tricoach/app/public/wp-includes/wp-db.php:2030
+[30-Mar-2020 16:08:07 UTC] PHP Parse error:  syntax error, unexpected '7' (T_LNUMBER), expecting variable (T_VARIABLE) or '{' or '$' in /Users/samhudson/Local Sites/tricoach/app/public/wp-content/themes/tri-coach/template-parts/dashboard-training-nav.php on line 18
+[30-Mar-2020 16:08:19 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /Users/samhudson/Local Sites/tricoach/app/public/wp-content/themes/tri-coach/template-parts/dashboard-training-nav.php on line 18
+[30-Mar-2020 16:09:37 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ')' in /Users/samhudson/Local Sites/tricoach/app/public/wp-content/themes/tri-coach/template-parts/dashboard-training-nav.php on line 21
+[30-Mar-2020 16:10:00 UTC] PHP Parse error:  syntax error, unexpected '$sevenDays' (T_VARIABLE), expecting ')' in /Users/samhudson/Local Sites/tricoach/app/public/wp-content/themes/tri-coach/template-parts/dashboard-training-nav.php on line 21
+[30-Mar-2020 16:11:22 UTC] PHP Parse error:  syntax error, unexpected '$sevenDays' (T_VARIABLE), expecting ')' in /Users/samhudson/Local Sites/tricoach/app/public/wp-content/themes/tri-coach/template-parts/dashboard-training-nav.php on line 21
+[30-Mar-2020 16:16:14 UTC] PHP Parse error:  syntax error, unexpected 'width' (T_STRING), expecting ')' in /Users/samhudson/Local Sites/tricoach/app/public/wp-content/themes/tri-coach/template-parts/dashboard-training-nav.php on line 21
+[30-Mar-2020 16:27:42 UTC] PHP Parse error:  syntax error, unexpected '$sevenDays' (T_VARIABLE), expecting ')' in /Users/samhudson/Local Sites/tricoach/app/public/wp-content/themes/tri-coach/template-parts/dashboard-training-nav.php on line 22
+[30-Mar-2020 16:30:32 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /Users/samhudson/Local Sites/tricoach/app/public/wp-content/themes/tri-coach/template-parts/dashboard-training-nav.php on line 18

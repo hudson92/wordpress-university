@@ -474,3 +474,4 @@ Stack trace:
 [06-Feb-2020 22:52:43 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 145
 [06-Feb-2020 22:52:44 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 145
 [06-Feb-2020 22:52:44 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 145
+[13-Oct-2020 22:42:33 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 53
