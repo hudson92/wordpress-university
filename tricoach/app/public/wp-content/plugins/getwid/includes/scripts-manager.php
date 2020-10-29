@@ -12,23 +12,25 @@ class ScriptsManager {
 	private $prefix;
 
 	/**
-	 * ScriptsManager constructor.	
+	 * ScriptsManager constructor.
 	 */
 	public function __construct() {
-		$settings = Settings::getInstance();
+
+		$settings = getwid()->settings();
 
 		$this->version = $settings->getVersion();
 		$this->prefix  = $settings->getPrefix();
 
-		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueueEditorAssets'     ] ); //Backend only
-		add_action( 'enqueue_block_assets'       , [ $this, 'enqueueFrontBlockAssets' ] ); //Frontend only
+		// Fires after block assets have been enqueued for the editing interface.
+		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueueEditorAssets'] );
 
+		// Fires after enqueuing block assets for both editor and front-end.
+		add_action( 'enqueue_block_assets', [ $this, 'enqueueFrontBlockAssets' ] );
+
+		// section_content_width inline styles
 		add_action( 'after_theme_setup', [ $this, 'enqueue_editor_section_css' ] );
 
-		// echo '<pre>';
-		// var_dump( $GLOBALS );
-		// echo '</pre>';
-		// exit;		
+		add_action( 'wp_footer', [ $this, 'localizeFrontend'] );
 	}
 
 	public function get_image_sizes() {
@@ -122,6 +124,16 @@ class ScriptsManager {
 			true
 		);
 
+		//disabled blocks
+		$disabledBlocks = [];
+		$disabledBlocksData = [];
+		if ( getwid()->blocksManager()->hasDisabledBlocks() ) {
+			$disabledBlocks = getwid()->blocksManager()->getDisabledBlocks();
+			foreach ( $disabledBlocks as $block ) {
+				$disabledBlocksData[] = $block->getBlockName();
+			}
+		}
+
 		$this->load_locale_data();
 
 		wp_localize_script(
@@ -131,6 +143,7 @@ class ScriptsManager {
 				'getwid/editor_blocks_js/localize_data',
 				[
 					'localeData' => $this->get_locale_data( 'getwid' ),
+					'disabled_blocks' => $disabledBlocksData,
 					'settings' => [
 						'wide_support' => get_theme_support( 'align-wide' ),
 						'date_time_utc' => current_time('Y-m-d H:i:s'),
@@ -148,9 +161,9 @@ class ScriptsManager {
 						'debug' => ( defined( 'WP_DEBUG' ) ? WP_DEBUG : false )
 					],
 					'templates' => [
-						'name' => PostTemplatePart::$postType,
-						'new' => admin_url( 'post-new.php?post_type=' . PostTemplatePart::$postType ),
-						'view' => admin_url( 'edit.php?post_type=' . PostTemplatePart::$postType ),
+						'name' => getwid()->postTemplatePart()->postType,
+						'new' => admin_url( 'post-new.php?post_type=' . getwid()->postTemplatePart()->postType ),
+						'view' => admin_url( 'edit.php?post_type=' . getwid()->postTemplatePart()->postType ),
 						'edit' => admin_url( 'post.php?post=' )
 					],
 					'ajax_url' => admin_url( 'admin-ajax.php' ),
@@ -177,25 +190,50 @@ class ScriptsManager {
 	}
 
 	/**
-	 * Enqueue frontend-only block js and css
+	 * Enqueue js and css for both editor and front-end
+	 *
 	 */
 	public function enqueueFrontBlockAssets() {
 
-		//Backend & Frontend
-		wp_enqueue_style(
-			"{$this->prefix}-blocks",
-			getwid_get_plugin_url( 'assets/css/blocks.style.css' ),
-			apply_filters(
-				'getwid/blocks_style_css/dependencies',
-				[]
-			),
-			$this->version
-		);
+		// *** Start of Backend & Frontend ***
 
-		wp_add_inline_style( "{$this->prefix}-blocks", getwid_generate_section_content_width_css() );
-		// -Backend & Frontend
+		/**
+		 * Assets optimization. Currently in Beta.
+		 * @since 1.5.3
+		 */
+		//$_has_getwid_blocks = \Getwid\BlocksManager::getInstance()->hasGetwidBlocks();
+		$_has_enabled_blocks = getwid()->blocksManager()->hasEnabledBlocks();
+		//$_getwid_has_nested_blocks = \Getwid\BlocksManager::getInstance()->hasGetwidNestedBlocks();
 
-		if ( is_admin() ) {
+		//getwid_log('enqueueFrontBlockAssets/hasGetwidBlocks', $_has_getwid_blocks );
+		getwid_log('enqueueFrontBlockAssets/hasEnabledBlocks', $_has_enabled_blocks );
+		//getwid_log('enqueueFrontBlockAssets/has_getwid_nested_blocks', $_getwid_has_nested_blocks );
+
+		if ( $_has_enabled_blocks ) {
+
+			wp_enqueue_style(
+				"{$this->prefix}-blocks",
+				getwid_get_plugin_url( 'assets/css/blocks.style.css' ),
+
+				// section, banner, icon-box, icon, image-box, image-hotspot, media-text-slider, video-popup, post-carousel, post-slider, images-slider
+				apply_filters(
+					'getwid/blocks_style_css/dependencies',
+					[]
+				),
+				$this->version
+			);
+
+			wp_add_inline_style( "{$this->prefix}-blocks", getwid_generate_section_content_width_css() );
+
+		}
+
+		// *** End of Backend & Frontend ***
+
+		/**
+		 * Assets optimization. Currently in Beta.
+		 * @since 1.5.3
+		 */
+		if ( is_admin() || ! $_has_enabled_blocks ) {
 			return;
 		}
 
@@ -204,12 +242,14 @@ class ScriptsManager {
 			getwid_get_plugin_url( 'assets/js/frontend.blocks.js' ),
 			apply_filters(
 				'getwid/frontend_blocks_js/dependencies',
-				[ 'lodash', 'jquery' ]
+				[ 'jquery' ]
 			),
 			$this->version,
 			true
 		);
+	}
 
+	public function localizeFrontend() {
 		wp_localize_script(
 			"{$this->prefix}-blocks-frontend-js",
 			'Getwid',
@@ -223,7 +263,7 @@ class ScriptsManager {
 					'ajax_url' => admin_url( 'admin-ajax.php' ),
 					'nonces'   => array(
 						'recaptcha_v2_contact_form' => wp_create_nonce( 'getwid_nonce_contact_form' )
-					)
+					),
 				]
 			)
 		);

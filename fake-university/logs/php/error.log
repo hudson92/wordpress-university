@@ -475,3 +475,166 @@ Stack trace:
 [06-Feb-2020 22:52:44 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 145
 [06-Feb-2020 22:52:44 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ';' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 145
 [13-Oct-2020 22:42:33 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/functions.php on line 53
+[29-Oct-2020 20:36:01 UTC] PHP Warning:  array_push() expects parameter 1 to be array, null given in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 21
+[29-Oct-2020 20:36:01 UTC] PHP Stack trace:
+[29-Oct-2020 20:36:01 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/index.php:0
+[29-Oct-2020 20:36:01 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
+[29-Oct-2020 20:36:01 UTC] PHP   3. wp() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:16
+[29-Oct-2020 20:36:01 UTC] PHP   4. WP->main() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/functions.php:1285
+[29-Oct-2020 20:36:01 UTC] PHP   5. WP->parse_request() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp.php:745
+[29-Oct-2020 20:36:01 UTC] PHP   6. do_action_ref_array() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp.php:388
+[29-Oct-2020 20:36:01 UTC] PHP   7. WP_Hook->do_action() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/plugin.php:544
+[29-Oct-2020 20:36:01 UTC] PHP   8. WP_Hook->apply_filters() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:311
+[29-Oct-2020 20:36:01 UTC] PHP   9. rest_api_loaded() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:287
+[29-Oct-2020 20:36:01 UTC] PHP  10. WP_REST_Server->serve_request() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php:339
+[29-Oct-2020 20:36:01 UTC] PHP  11. WP_REST_Server->dispatch() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:376
+[29-Oct-2020 20:36:01 UTC] PHP  12. universitySearchResults() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:1050
+[29-Oct-2020 20:36:01 UTC] PHP  13. array_push() /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php:21
+[29-Oct-2020 20:36:01 UTC] PHP Warning:  array_push() expects parameter 1 to be array, null given in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 21
+[29-Oct-2020 20:36:01 UTC] PHP Stack trace:
+[29-Oct-2020 20:36:01 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/index.php:0
+[29-Oct-2020 20:36:01 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
+[29-Oct-2020 20:36:01 UTC] PHP   3. wp() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:16
+[29-Oct-2020 20:36:01 UTC] PHP   4. WP->main() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/functions.php:1285
+[29-Oct-2020 20:36:01 UTC] PHP   5. WP->parse_request() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp.php:745
+[29-Oct-2020 20:36:01 UTC] PHP   6. do_action_ref_array() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp.php:388
+[29-Oct-2020 20:36:01 UTC] PHP   7. WP_Hook->do_action() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/plugin.php:544
+[29-Oct-2020 20:36:01 UTC] PHP   8. WP_Hook->apply_filters() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:311
+[29-Oct-2020 20:36:01 UTC] PHP   9. rest_api_loaded() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:287
+[29-Oct-2020 20:36:01 UTC] PHP  10. WP_REST_Server->serve_request() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php:339
+[29-Oct-2020 20:36:01 UTC] PHP  11. WP_REST_Server->dispatch() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:376
+[29-Oct-2020 20:36:01 UTC] PHP  12. universitySearchResults() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:1050
+[29-Oct-2020 20:36:01 UTC] PHP  13. array_push() /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php:21
+[29-Oct-2020 20:36:01 UTC] PHP Warning:  array_push() expects parameter 1 to be array, null given in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 21
+[29-Oct-2020 20:36:01 UTC] PHP Stack trace:
+[29-Oct-2020 20:36:01 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/index.php:0
+[29-Oct-2020 20:36:01 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
+[29-Oct-2020 20:36:01 UTC] PHP   3. wp() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:16
+[29-Oct-2020 20:36:01 UTC] PHP   4. WP->main() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/functions.php:1285
+[29-Oct-2020 20:36:01 UTC] PHP   5. WP->parse_request() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp.php:745
+[29-Oct-2020 20:36:01 UTC] PHP   6. do_action_ref_array() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp.php:388
+[29-Oct-2020 20:36:01 UTC] PHP   7. WP_Hook->do_action() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/plugin.php:544
+[29-Oct-2020 20:36:01 UTC] PHP   8. WP_Hook->apply_filters() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:311
+[29-Oct-2020 20:36:01 UTC] PHP   9. rest_api_loaded() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:287
+[29-Oct-2020 20:36:01 UTC] PHP  10. WP_REST_Server->serve_request() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php:339
+[29-Oct-2020 20:36:01 UTC] PHP  11. WP_REST_Server->dispatch() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:376
+[29-Oct-2020 20:36:01 UTC] PHP  12. universitySearchResults() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:1050
+[29-Oct-2020 20:36:01 UTC] PHP  13. array_push() /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php:21
+[29-Oct-2020 20:36:01 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php:21) in /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php on line 1372
+[29-Oct-2020 20:36:01 UTC] PHP Stack trace:
+[29-Oct-2020 20:36:01 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/index.php:0
+[29-Oct-2020 20:36:01 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
+[29-Oct-2020 20:36:01 UTC] PHP   3. wp() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:16
+[29-Oct-2020 20:36:01 UTC] PHP   4. WP->main() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/functions.php:1285
+[29-Oct-2020 20:36:01 UTC] PHP   5. WP->parse_request() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp.php:745
+[29-Oct-2020 20:36:01 UTC] PHP   6. do_action_ref_array() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp.php:388
+[29-Oct-2020 20:36:01 UTC] PHP   7. WP_Hook->do_action() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/plugin.php:544
+[29-Oct-2020 20:36:01 UTC] PHP   8. WP_Hook->apply_filters() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:311
+[29-Oct-2020 20:36:01 UTC] PHP   9. rest_api_loaded() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:287
+[29-Oct-2020 20:36:01 UTC] PHP  10. WP_REST_Server->serve_request() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php:339
+[29-Oct-2020 20:36:01 UTC] PHP  11. WP_REST_Server->send_headers() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:408
+[29-Oct-2020 20:36:01 UTC] PHP  12. WP_REST_Server->send_header() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:1384
+[29-Oct-2020 20:36:01 UTC] PHP  13. header() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:1372
+[29-Oct-2020 20:36:10 UTC] PHP Warning:  array_push() expects parameter 1 to be array, null given in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 21
+[29-Oct-2020 20:36:10 UTC] PHP Stack trace:
+[29-Oct-2020 20:36:10 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/index.php:0
+[29-Oct-2020 20:36:10 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
+[29-Oct-2020 20:36:10 UTC] PHP   3. wp() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:16
+[29-Oct-2020 20:36:10 UTC] PHP   4. WP->main() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/functions.php:1285
+[29-Oct-2020 20:36:10 UTC] PHP   5. WP->parse_request() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp.php:745
+[29-Oct-2020 20:36:10 UTC] PHP   6. do_action_ref_array() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp.php:388
+[29-Oct-2020 20:36:10 UTC] PHP   7. WP_Hook->do_action() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/plugin.php:544
+[29-Oct-2020 20:36:10 UTC] PHP   8. WP_Hook->apply_filters() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:311
+[29-Oct-2020 20:36:10 UTC] PHP   9. rest_api_loaded() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:287
+[29-Oct-2020 20:36:10 UTC] PHP  10. WP_REST_Server->serve_request() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php:339
+[29-Oct-2020 20:36:10 UTC] PHP  11. WP_REST_Server->dispatch() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:376
+[29-Oct-2020 20:36:10 UTC] PHP  12. universitySearchResults() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:1050
+[29-Oct-2020 20:36:10 UTC] PHP  13. array_push() /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php:21
+[29-Oct-2020 20:36:10 UTC] PHP Warning:  array_push() expects parameter 1 to be array, null given in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 21
+[29-Oct-2020 20:36:10 UTC] PHP Stack trace:
+[29-Oct-2020 20:36:10 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/index.php:0
+[29-Oct-2020 20:36:10 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
+[29-Oct-2020 20:36:10 UTC] PHP   3. wp() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:16
+[29-Oct-2020 20:36:10 UTC] PHP   4. WP->main() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/functions.php:1285
+[29-Oct-2020 20:36:10 UTC] PHP   5. WP->parse_request() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp.php:745
+[29-Oct-2020 20:36:10 UTC] PHP   6. do_action_ref_array() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp.php:388
+[29-Oct-2020 20:36:10 UTC] PHP   7. WP_Hook->do_action() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/plugin.php:544
+[29-Oct-2020 20:36:10 UTC] PHP   8. WP_Hook->apply_filters() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:311
+[29-Oct-2020 20:36:10 UTC] PHP   9. rest_api_loaded() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:287
+[29-Oct-2020 20:36:10 UTC] PHP  10. WP_REST_Server->serve_request() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php:339
+[29-Oct-2020 20:36:10 UTC] PHP  11. WP_REST_Server->dispatch() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:376
+[29-Oct-2020 20:36:10 UTC] PHP  12. universitySearchResults() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:1050
+[29-Oct-2020 20:36:10 UTC] PHP  13. array_push() /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php:21
+[29-Oct-2020 20:36:10 UTC] PHP Warning:  array_push() expects parameter 1 to be array, null given in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 21
+[29-Oct-2020 20:36:10 UTC] PHP Stack trace:
+[29-Oct-2020 20:36:10 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/index.php:0
+[29-Oct-2020 20:36:10 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
+[29-Oct-2020 20:36:10 UTC] PHP   3. wp() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:16
+[29-Oct-2020 20:36:10 UTC] PHP   4. WP->main() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/functions.php:1285
+[29-Oct-2020 20:36:10 UTC] PHP   5. WP->parse_request() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp.php:745
+[29-Oct-2020 20:36:10 UTC] PHP   6. do_action_ref_array() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp.php:388
+[29-Oct-2020 20:36:10 UTC] PHP   7. WP_Hook->do_action() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/plugin.php:544
+[29-Oct-2020 20:36:10 UTC] PHP   8. WP_Hook->apply_filters() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:311
+[29-Oct-2020 20:36:10 UTC] PHP   9. rest_api_loaded() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:287
+[29-Oct-2020 20:36:10 UTC] PHP  10. WP_REST_Server->serve_request() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php:339
+[29-Oct-2020 20:36:10 UTC] PHP  11. WP_REST_Server->dispatch() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:376
+[29-Oct-2020 20:36:10 UTC] PHP  12. universitySearchResults() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:1050
+[29-Oct-2020 20:36:10 UTC] PHP  13. array_push() /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php:21
+[29-Oct-2020 20:36:10 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php:21) in /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php on line 1372
+[29-Oct-2020 20:36:10 UTC] PHP Stack trace:
+[29-Oct-2020 20:36:10 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/index.php:0
+[29-Oct-2020 20:36:10 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
+[29-Oct-2020 20:36:10 UTC] PHP   3. wp() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:16
+[29-Oct-2020 20:36:10 UTC] PHP   4. WP->main() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/functions.php:1285
+[29-Oct-2020 20:36:10 UTC] PHP   5. WP->parse_request() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp.php:745
+[29-Oct-2020 20:36:10 UTC] PHP   6. do_action_ref_array() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp.php:388
+[29-Oct-2020 20:36:10 UTC] PHP   7. WP_Hook->do_action() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/plugin.php:544
+[29-Oct-2020 20:36:10 UTC] PHP   8. WP_Hook->apply_filters() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:311
+[29-Oct-2020 20:36:10 UTC] PHP   9. rest_api_loaded() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:287
+[29-Oct-2020 20:36:10 UTC] PHP  10. WP_REST_Server->serve_request() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php:339
+[29-Oct-2020 20:36:10 UTC] PHP  11. WP_REST_Server->send_headers() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:408
+[29-Oct-2020 20:36:10 UTC] PHP  12. WP_REST_Server->send_header() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:1384
+[29-Oct-2020 20:36:10 UTC] PHP  13. header() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:1372
+[29-Oct-2020 20:54:47 UTC] PHP Warning:  Use of undefined constant professors - assumed 'professors' (this will throw an Error in a future version of PHP) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 37
+[29-Oct-2020 20:54:47 UTC] PHP Stack trace:
+[29-Oct-2020 20:54:47 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/index.php:0
+[29-Oct-2020 20:54:47 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
+[29-Oct-2020 20:54:47 UTC] PHP   3. wp() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:16
+[29-Oct-2020 20:54:47 UTC] PHP   4. WP->main() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/functions.php:1285
+[29-Oct-2020 20:54:47 UTC] PHP   5. WP->parse_request() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp.php:745
+[29-Oct-2020 20:54:47 UTC] PHP   6. do_action_ref_array() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp.php:388
+[29-Oct-2020 20:54:47 UTC] PHP   7. WP_Hook->do_action() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/plugin.php:544
+[29-Oct-2020 20:54:47 UTC] PHP   8. WP_Hook->apply_filters() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:311
+[29-Oct-2020 20:54:47 UTC] PHP   9. rest_api_loaded() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:287
+[29-Oct-2020 20:54:47 UTC] PHP  10. WP_REST_Server->serve_request() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php:339
+[29-Oct-2020 20:54:47 UTC] PHP  11. WP_REST_Server->dispatch() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:376
+[29-Oct-2020 20:54:47 UTC] PHP  12. universitySearchResults() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:1050
+[29-Oct-2020 20:54:47 UTC] PHP Warning:  Use of undefined constant professors - assumed 'professors' (this will throw an Error in a future version of PHP) in /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php on line 37
+[29-Oct-2020 20:54:47 UTC] PHP Stack trace:
+[29-Oct-2020 20:54:47 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/index.php:0
+[29-Oct-2020 20:54:47 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
+[29-Oct-2020 20:54:47 UTC] PHP   3. wp() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:16
+[29-Oct-2020 20:54:47 UTC] PHP   4. WP->main() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/functions.php:1285
+[29-Oct-2020 20:54:47 UTC] PHP   5. WP->parse_request() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp.php:745
+[29-Oct-2020 20:54:47 UTC] PHP   6. do_action_ref_array() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp.php:388
+[29-Oct-2020 20:54:47 UTC] PHP   7. WP_Hook->do_action() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/plugin.php:544
+[29-Oct-2020 20:54:47 UTC] PHP   8. WP_Hook->apply_filters() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:311
+[29-Oct-2020 20:54:47 UTC] PHP   9. rest_api_loaded() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:287
+[29-Oct-2020 20:54:47 UTC] PHP  10. WP_REST_Server->serve_request() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php:339
+[29-Oct-2020 20:54:47 UTC] PHP  11. WP_REST_Server->dispatch() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:376
+[29-Oct-2020 20:54:47 UTC] PHP  12. universitySearchResults() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:1050
+[29-Oct-2020 20:54:47 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /Users/samhudson/Local Sites/fake-university/app/public/wp-content/themes/university-theme/inc/search-route.php:37) in /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php on line 1372
+[29-Oct-2020 20:54:47 UTC] PHP Stack trace:
+[29-Oct-2020 20:54:47 UTC] PHP   1. {main}() /Users/samhudson/Local Sites/fake-university/app/public/index.php:0
+[29-Oct-2020 20:54:47 UTC] PHP   2. require() /Users/samhudson/Local Sites/fake-university/app/public/index.php:17
+[29-Oct-2020 20:54:47 UTC] PHP   3. wp() /Users/samhudson/Local Sites/fake-university/app/public/wp-blog-header.php:16
+[29-Oct-2020 20:54:47 UTC] PHP   4. WP->main() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/functions.php:1285
+[29-Oct-2020 20:54:47 UTC] PHP   5. WP->parse_request() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp.php:745
+[29-Oct-2020 20:54:47 UTC] PHP   6. do_action_ref_array() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp.php:388
+[29-Oct-2020 20:54:47 UTC] PHP   7. WP_Hook->do_action() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/plugin.php:544
+[29-Oct-2020 20:54:47 UTC] PHP   8. WP_Hook->apply_filters() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:311
+[29-Oct-2020 20:54:47 UTC] PHP   9. rest_api_loaded() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/class-wp-hook.php:287
+[29-Oct-2020 20:54:47 UTC] PHP  10. WP_REST_Server->serve_request() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api.php:339
+[29-Oct-2020 20:54:47 UTC] PHP  11. WP_REST_Server->send_headers() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:408
+[29-Oct-2020 20:54:47 UTC] PHP  12. WP_REST_Server->send_header() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:1384
+[29-Oct-2020 20:54:47 UTC] PHP  13. header() /Users/samhudson/Local Sites/fake-university/app/public/wp-includes/rest-api/class-wp-rest-server.php:1372

@@ -3,8 +3,8 @@ Contributors: WPEverest
 Tags: user registration, registration, user profile, registration form, login form,
 Requires at least: 4.0
 Requires PHP: 5.3
-Tested up to: 5.3.2
-Stable tag: 1.8.2.1
+Tested up to: 5.5.1
+Stable tag: 1.8.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -84,6 +84,8 @@ User Registration can be easily extended with some premium addons.
 
 * [Payments (PayPal)](https://wpeverest.com/wordpress-plugins/user-registration/payments/?utm_source=wporg&utm_medium=link&utm_campaign=ur-upgrade-to-pro) - Integrates PayPal into your forms for registration fee payments, donations, and more.
 
+* [Stripe](https://wpeverest.com/wordpress-plugins/user-registration/stripe/?utm_source=wporg&utm_medium=link&utm_campaign=ur-upgrade-to-pro) - Allows you to accept one time or recurring payments in your registration forms using Stripe.
+
 * [Geolocation](https://wpeverest.com/wordpress-plugins/user-registration/geolocation/?utm_source=wporg&utm_medium=link&utm_campaign=ur-upgrade-to-pro) - Collects and stores users geolocation data along with their form filled information.
 
 * [LearnDash](https://wpeverest.com/wordpress-plugins/user-registration/learndash/?utm_source=wporg&utm_medium=link&utm_campaign=ur-upgrade-to-pro) - Allows users to view their registered learndash courses, course progresses, expiry date on my account section and more.
@@ -91,6 +93,11 @@ User Registration can be easily extended with some premium addons.
 * [Invite Codes](https://wpeverest.com/wordpress-plugins/user-registration/invite-codes/?utm_source=wporg&utm_medium=link&utm_campaign=ur-upgrade-to-pro) - Allows you to restrict the registration on your site to only users with invite codes. Check our [invitation code guide](https://wpeverest.com/blog/user-registration-invitation-code/)
 
 * [Field Visibility](https://wpeverest.com/wordpress-plugins/user-registration/field-visibility/?utm_source=wporg&utm_medium=link&utm_campaign=ur-upgrade-to-pro) - Allows you to hide registration fields on the registration form but show it in the account profile page and vice versa. Also, make selective fields read-only on profile page, registration form or both.
+
+* [Customize My Account](https://wpeverest.com/wordpress-plugins/user-registration/customize-my-account/?utm_source=wporg&utm_medium=link&utm_campaign=ur-upgrade-to-pro) - Allows you to create, edit and delete additional tabs on the account page along with custom content for that tab. Also supports drag and drop sorting of account tabs.
+
+* [Extras](https://wpeverest.com/wordpress-plugins/user-registration/extras/?utm_source=wporg&utm_medium=link&utm_campaign=ur-upgrade-to-pro) - Combines a bunch of smaller features like analytics, popup forms, domain whitelist, auto password generation, and more.
+
 
 == Installation ==
 
@@ -141,6 +148,89 @@ Yes, the plugin has a shortcode for the login form.
 
 == Changelog ==
 
+= 1.8.8 - 13/10/2020
+* Enhance - Hide signup link on login if users_can_register option is not enabled.
+* Fix - Number fields step option not working.
+* Fix - Send an email after payment validation.
+* Fix - Form List table bottom trash filter button not work.
+* Fix - Unexpected json > 0 error.
+* Tweak - Design changes in file upload of setting page.
+
+= 1.8.7.1 - 14/09/2020
+* Fix - Conditional logic compatibility with WordPress 5.5
+
+= 1.8.7 - 09/09/2020
+* Enhance - Filter Users with approval status and specific UR forms.
+* Enhance - Add placeholder option in the Date field.
+* Tweak - Choice field option value and default value change and update.
+* Tweak - Delete invite codes and mailchimp date from option table on uninstall.
+* Fix - Import/Export/Duplicate form not working while using html tags in description.
+* Fix - Date Field value disappears on user update by admin and woocommerce compatibility.
+* Fix - Ignore missing field validation based on field visibility settings.
+* Fix - Choice field and country field compatibility with WordPress 5.5
+* Fix - Disabled submit button on ReCaptcha fail.
+* Fix - My account endpoint URLs on the home page.
+* Fix - Registration not working on Internet Explorer browser.
+* Dev - Change date() to date_i18n() function and Timezone Compatibility.
+* Dev - Deprecate Everest Form Hook and introduce new hook instead.
+* Dev - Password Strength Meter compatibility with WordPress 5.5
+* Dev - Remove extra double quotes from checkbox fields label.
+
+= 1.8.6 - 11/08/2020
+* Enhance - Login form customization
+* Enhance - Introduce tooltips in Form Builder
+* Enhance - Copy icon on shortcode column in registration forms list table
+* Enhance - Option to disable logout confirmation
+* Tweak- Wordpress 5.5 Compatibility
+* Fix - Profile picture, file upload, mailchimp and smart phone field sync with woocommerce
+* Fix - ReCaptcha script loads in lost password page
+* Fix - Cannot auto scroll while dragging fields in the form builder
+* Fix - Required option and Hide Label option conflict
+* Fix - Reset password for other plugin registered users
+* Dev - SASS files
+
+= 1.8.5 - 13/07/2020
+* Feature- Ajax form submission on edit profile
+* Dev - Added OR Logic Gate in conditional logic.
+* Dev - User Registration Stripe Addon Compatibility.
+* Dev - User Registration Extras Addon Compatibility.
+* Dev - Content Restriction Access Rules.
+* Fix - Form Preview issue.
+* Fix - My account shortcode with Elementor.
+* Fix - User approval status change and filter.
+* Fix - Date field value disappearing from the Profile Details section.
+* Fix - UR script enqueued in non UR-Page.
+* Fix - WPML Compatibility in myaccount section.
+* Fix - Multiple forms load and submit.
+* Fix - wysiwyg field value update in admin profile edit.
+* Fix - Phone field country code submission.
+
+= 1.8.4 - 14/05/2020
+* Enhance - Add custom CSS class in fields.
+* Dev - MailChimp add-on compatibility changes.
+* Dev - File upload addon compatibility changes
+* Dev - Invite code add-on compatibility changes.
+* Fix - Display of new users count even after the all users page refresh
+* Fix - Enable/Disable checkbox backward compatibility
+* Fix - Elementor plugin nav menu title conflict.
+
+= 1.8.3 - 17/04/2020
+* Security - Form field validation for missing required fields.
+* Enhance - Toggle out on clicking out of form name edit box.
+* Enhance - Confirmation message on field deletion.
+* Enhance - Form live changes for conditional logic.
+* Enhance - Registered At column to display registered log.
+* Dev - WordPress v5.4 Compatibility.
+* Dev - WPML compatibility for Select2 and Multi Select2 fields.
+* Dev - Invite code compatibility with the conditional logic addon.
+* Fix - Section division issue in form builder.
+* Fix - Multiple date field.
+* Fix - User approval status.
+* Fix - Enable Recaptcha and password strength checkbox backward compatibility.
+* Fix - Placeholder conflict with the value of the select field.
+* Fix - User Registration component placeholder design on Gutenblock.
+* Fix - Form event submit conflict in presence of popup creator plugins.
+
 = 1.8.2.1 - 20/03/2020
 * Fix - Unable to Login User Due to Pending Status.
 * Fix - Recaptcha Backward compatibility
@@ -184,19 +274,5 @@ Yes, the plugin has a shortcode for the login form.
 * Fix - Email attachment hook mismatch arguments.
 * Fix - wp_authenticate_user filter mismatch arguments.
 * Fix - Hide/show password enabled in edit profile.
-
-= 1.7.5 - 13/12/2019 =
-* Enhancement - Redirect URL after logout.
-* Enhancement - Password field eye icon.
-* Fix - Escaping attribute in checkbox field.
-* Fix - Remove admin notice from form builder.
-* Fix - Case sensitive in confirm password.
-* Fix - Invite code field name made non editable.
-
-= 1.7.4 - 21/11/2019 =
-* Feature - WPML Plugin Compatibility.
-* Tweak   - Country Field Default Value.
-* Tweak   - Icons alignment to support WordPress v5.3.
-* Fix     - HTML field Form Duplication.
 
 [See changelog for all versions](https://raw.githubusercontent.com/wpeverest/user-registration/master/CHANGELOG.txt).

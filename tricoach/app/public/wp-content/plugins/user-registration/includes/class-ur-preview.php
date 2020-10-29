@@ -79,7 +79,7 @@ class UR_Preview {
 	 * @return string
 	 */
 	public function template_include() {
-		return locate_template( array( 'page.php', 'single.php' ) );
+		return locate_template( array( 'page.php', 'single.php', 'index.php' ) );
 	}
 
 	/**
@@ -93,6 +93,8 @@ class UR_Preview {
 		if ( isset( $_GET['form_id'] ) ) {
 			add_filter( 'the_title', array( $this, 'form_preview_title' ) );
 			add_filter( 'the_content', array( $this, 'form_preview_content' ) );
+			add_filter( 'get_the_excerpt', array( $this, 'form_preview_content' ) );
+			add_filter( 'post_thumbnail_html', '__return_empty_string' );
 		}
 	}
 
@@ -124,10 +126,14 @@ class UR_Preview {
 	 * @return string
 	 */
 	public function form_preview_content( $content ) {
-		$form_id = absint( $_GET['form_id'] );
+		$form_id = isset( $_GET['form_id'] ) ? absint( $_GET['form_id'] ) : 0;
 
-		remove_filter( 'the_content', array( $this, 'form_preview_content_filter' ) );
-		$content = do_shortcode( '[user_registration_form id="' . $form_id . '"]' );
+		remove_filter( 'the_content', array( $this, 'form_preview_content' ) );
+		if ( function_exists( 'apply_shortcodes' ) ) {
+			$content = apply_shortcodes( '[user_registration_form id="' . $form_id . '"]' );
+		} else {
+			$content = do_shortcode( '[user_registration_form id="' . $form_id . '"]' );
+		}
 
 		return $content;
 	}
@@ -166,7 +172,7 @@ class UR_Preview {
 	 * @return string
 	 */
 	public function login_form_preview_content( $content ) {
-		remove_filter( 'the_content', array( $this, 'form_preview_content_filter' ) );
+		remove_filter( 'the_content', array( $this, 'form_preview_content' ) );
 
 		wp_enqueue_script( 'ur-my-account' );
 		$recaptcha_enabled = get_option( 'user_registration_login_options_enable_recaptcha', 'no' );

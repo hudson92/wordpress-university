@@ -35,4 +35,3 @@ do_action( 'user_registration_account_navigation' ); ?>
 		do_action( 'user_registration_account_content' );
 	?>
 </div>
-

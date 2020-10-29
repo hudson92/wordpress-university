@@ -2,37 +2,73 @@
 
 namespace Getwid\Blocks;
 
-class IconBox {
+class IconBox extends \Getwid\Blocks\AbstractBlock {
 
-    private $blockName = 'getwid/icon-box';
+	protected static $blockName = 'getwid/icon-box';
 
     public function __construct() {
 
-        $settings = \Getwid\Settings::getInstance();
-
-        add_filter( 'getwid/blocks_style_css/dependencies', [ $this, 'block_frontend_styles' ] );
+		parent::__construct( self::$blockName );
 
         register_block_type(
-            'getwid/icon-box'
+            'getwid/icon-box',
+			array(
+				'render_callback' => [ $this, 'render_callback' ]
+			)
         );
 
-        wp_register_style(
-            'animate',
-            getwid_get_plugin_url( 'vendors/animate.css/animate.min.css' ),
-            [],
-            '3.7.0'
-        );
+		if ( $this->isEnabled() ) {
+
+			add_filter( 'getwid/blocks_style_css/dependencies', [ $this, 'block_frontend_styles' ] );
+
+			wp_register_style(
+				'animate',
+				getwid_get_plugin_url( 'vendors/animate.css/animate.min.css' ),
+				[],
+				'3.7.0'
+			);
+		}
     }
+
+	public function getLabel() {
+		return __('Icon Box', 'getwid');
+	}
 
     public function block_frontend_styles($styles) {
 
+		getwid_log( self::$blockName . '::hasBlock', $this->hasBlock() );
+
+		//fontawesome
+		$styles = getwid()->fontIconsManager()->enqueueFonts( $styles );
+
 		//animate.min.css
-        if ( ! in_array( 'animate', $styles ) ) {
-            array_push( $styles, 'animate' );        
+        if ( is_admin() && ! in_array( 'animate', $styles ) ) {
+            array_push( $styles, 'animate' );
         }
 
         return $styles;
     }
+
+	public function enqueue_block_frontend_styles() {
+
+		if ( is_admin() ) {
+			return;
+		}
+
+		if ( ! wp_style_is( 'animate', 'enqueued' ) ) {
+			wp_enqueue_style('animate');
+		}
+
+	}
+
+	public function render_callback( $attributes, $content ) {
+
+		$this->enqueue_block_frontend_styles();
+
+		return $content;
+	}
 }
 
-new \Getwid\Blocks\IconBox();
+getwid()->blocksManager()->addBlock(
+	new \Getwid\Blocks\IconBox()
+);

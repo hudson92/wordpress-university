@@ -2,11 +2,13 @@
 
 namespace Getwid\Blocks;
 
-class CustomPostType {
+class CustomPostType extends \Getwid\Blocks\AbstractBlock {
 
-    private $block_name = 'getwid/custom-post-type';
+	protected static $blockName = 'getwid/custom-post-type';
 
     public function __construct() {
+
+		parent::__construct( self::$blockName );
 
         register_block_type(
             'getwid/custom-post-type',
@@ -20,6 +22,10 @@ class CustomPostType {
                     'postsToShow' => array(
                         'type' => 'number',
                         'default' => 5
+					),
+                    'offset' => array(
+                        'type' => 'number',
+                        'default' => 0
                     ),
                     'pagination' => array(
                         'type' => 'boolean',
@@ -36,6 +42,10 @@ class CustomPostType {
                         'type' => 'string'
 					),
                     'excludeCurrentPost' => array(
+                        'type' => 'boolean',
+                        'default' => false
+					),
+					'childPagesCurrentPage' => array(
                         'type' => 'boolean',
                         'default' => false
                     ),
@@ -91,16 +101,36 @@ class CustomPostType {
                         'type' => 'string'
                     )
                 ),
-                'render_callback' => [ $this, 'render_custom_post_type' ]
+                'render_callback' => [ $this, 'render_callback' ]
             )
         );
+
+		if ( $this->isEnabled() ) {
+
+			add_filter( 'getwid/blocks_style_css/dependencies', [ $this, 'block_frontend_styles' ] );
+		}
     }
 
-    public function render_custom_post_type( $attributes, $content ) {
+	public function getLabel() {
+		return __('Custom Post Type', 'getwid');
+	}
+
+	public function block_frontend_styles($styles) {
+
+		getwid_log( self::$blockName . '::hasBlock', $this->hasBlock() );
+
+		//fontawesome
+		// for /template-parts/*
+		$styles = getwid()->fontIconsManager()->enqueueFonts( $styles );
+
+        return $styles;
+    }
+
+    public function render_callback( $attributes, $content ) {
 
         //Custom Post Type
         $query_args = [];
-        getwid_build_custom_post_type_query( $query_args, $attributes );
+		getwid_build_custom_post_type_query( $query_args, $attributes );
 
         $q = new \WP_Query( $query_args );
         //Custom Post Type
@@ -196,9 +226,16 @@ class CustomPostType {
                     <h2 class="screen-reader-text"><?php __('Posts navigation', 'getwid') ?></h2>
                     <div class="nav-links">
                     <?php
+						$total_pages = $q->max_num_pages;
+
+						if ($attributes['offset'] != 0){
+							$total_rows = max( 0, $q->found_posts - $attributes['offset'] );
+							$total_pages = ceil( $total_rows / $attributes['postsToShow'] );
+						}
+
 	                    $pagination_args = array(
 		                    'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
-		                    'total'        => $q->max_num_pages,
+		                    'total'        => $total_pages,
 		                    'current'      => max( 1, get_query_var( 'paged' ) ),
 		                    'format'       => '?paged=%#%',
 		                    'show_all'     => false,
@@ -225,4 +262,6 @@ class CustomPostType {
     }
 }
 
-new \Getwid\Blocks\CustomPostType();
+getwid()->blocksManager()->addBlock(
+	new \Getwid\Blocks\CustomPostType()
+);

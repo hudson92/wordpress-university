@@ -2,13 +2,15 @@
 
 namespace Getwid\Blocks;
 
-class Instagram {
+class Instagram extends \Getwid\Blocks\AbstractBlock {
 
-    private $blockName = 'getwid/instagram';
+	protected static $blockName = 'getwid/instagram';
 
     public function __construct() {
 
-        add_action( 'wp_ajax_get_instagram_token', [ $this, 'get_instagram_token'] );
+        parent::__construct( self::$blockName );
+
+		add_action( 'wp_ajax_get_instagram_token', [ $this, 'get_instagram_token'] );
 
         register_block_type(
             'getwid/instagram',
@@ -21,71 +23,80 @@ class Instagram {
                     'gridColumns' => array(
                         'type' => 'number',
                         'default' => 3
-                    ), 
-                    'showLikes' => array(
-                        'type' => 'boolean',
-                        'default' => true
-                    ),
-                    'showComments' => array(
-                        'type' => 'boolean',
-                        'default' => true
                     ),
                     'spacing' => array(
                         'type' => 'string',
                         'default' => 'default'
-                    ),              
+                    ),
                     'align' => array(
                         'type' => 'string'
                     ),
-        
                     'className' => array(
                         'type' => 'string'
-                    ),           
+                    ),
                 ),
-                'render_callback' => [ $this, 'render_instagram' ]
+                'render_callback' => [ $this, 'render_callback' ]
             )
         );
+
+		if ( $this->isEnabled() ) {
+			add_filter( 'getwid/blocks_style_css/dependencies', [ $this, 'block_frontend_styles' ] );
+		}
     }
+
+	public function getLabel() {
+		return __('Instagram', 'getwid');
+	}
 
     public function get_instagram_token() {
         $action = $_POST[ 'option' ];
         $data   = $_POST[ 'data' ];
-    
+
         $response = false;
         if ( $action == 'get' ) {
             $response = get_option( 'getwid_instagram_token', '' );
         }
-    
+
         wp_send_json_success( $response );
     }
 
-    public function render_instagram( $attributes ) {
+    public function block_frontend_styles($styles) {
+
+		getwid_log( self::$blockName . '::hasBlock', $this->hasBlock() );
+
+        return $styles;
+    }
+
+    public function render_callback( $attributes ) {
         $error = false;
         $empty = false;
-    
+
         //Get Access Token
         $access_token = get_option( 'getwid_instagram_token' );
-    
+
         //If Empty Token
-        if (isset($access_token) && empty($access_token)){
-            if (current_user_can('manage_options')){
+        if ( empty($access_token) ) {
+            if ( current_user_can('manage_options') ) {
                 return '<p>' . sprintf(
                     __( 'Instagram Access Token is not set. <a href="%s">Connect Instagram Account</a>.', 'getwid' ),
-                    admin_url( 'options-writing.php' ) ) . '</p>';
+                    admin_url( 'options-writing.php#getwid-settings' ) ) . '</p>';
             } else {
                 return '';
             }
-        }
-    
+		}
+
         $instagram_media = get_transient( 'getwid_instagram_response_data' );
+
         if ( false === $instagram_media ) {
-    
-            //Get data from Instagram
+
+            $api_uri = 'https://graph.instagram.com/me/media?fields=id,media_type,media_url,permalink,caption,thumbnail_url&access_token=' . $access_token;
+
+			//Get data from Instagram
             $response = wp_remote_get(
-                'https://api.instagram.com/v1/users/self/media/recent?access_token=' . $access_token,
+                $api_uri,
                 array( 'timeout' => 15 )
-            );
-    
+			);
+
             if ( is_wp_error( $response ) ) {
                 if ( current_user_can('manage_options') ){
                     return '<p>' . $response->get_error_message() . '</p>';
@@ -94,15 +105,19 @@ class Instagram {
                 }
             } else {
                 $instagram_media = json_decode( wp_remote_retrieve_body( $response ) );
-    
+
                 //JSON valid
                 if ( json_last_error() === JSON_ERROR_NONE ) {
-                    if ( $instagram_media->meta->code == 200 ) {
-                        //Cache response
-                        set_transient( 'getwid_instagram_response_data', $instagram_media, 30 * MINUTE_IN_SECONDS );
+                    if ( isset($instagram_media->data) ) {
+
+						//Cache response
+						$expiration = intval( get_option( 'getwid_instagram_cache_timeout', 30 ) );
+
+                        set_transient( 'getwid_instagram_response_data', $instagram_media, $expiration * MINUTE_IN_SECONDS );
+
                     } else {
                         if ( current_user_can( 'manage_options' ) ) {
-                            return '<p>' . $instagram_media->meta->error_message . '</p>';
+                            return '<p>' . $instagram_media->error->message . '</p>';
                         } else {
                             return '';
                         }
@@ -112,24 +127,24 @@ class Instagram {
                 }
             }
         }
-    
+
         $class = $block_name = 'wp-block-getwid-instagram';
-    
+
         if ( isset( $attributes[ 'align' ] ) ) {
             $class .= ' align' . $attributes[ 'align' ];
         }
-    
+
         $wrapper_class = 'wp-block-getwid-instagram__wrapper';
         $wrapper_class .= " has-" . $attributes[ 'gridColumns' ] . "-columns";
-    
+
         if ( isset( $attributes[ 'spacing' ] ) && $attributes[ 'spacing' ] != 'default' ) {
             $class .= ' has-spacing-' . $attributes[ 'spacing' ];
         }
-    
+
         if ( isset( $attributes[ 'className' ] ) ) {
             $class .= ' ' . $attributes[ 'className' ];
         }
-    
+
         ob_start();
         ?><div class="<?php echo esc_attr( $class ); ?>">
             <div class="<?php echo esc_attr( $wrapper_class );?>">
@@ -147,10 +162,12 @@ class Instagram {
                     } // end foreach
                 ?></div>
         </div><?php
-    
+
         $result = ob_get_clean();
         return $result;
     }
 }
 
-new \Getwid\Blocks\Instagram();
+getwid()->blocksManager()->addBlock(
+	new \Getwid\Blocks\Instagram()
+);

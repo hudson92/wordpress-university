@@ -8,24 +8,17 @@ namespace Getwid;
  */
 class PostTemplatePart {
 
-	private $version;
-	private $prefix;
-
-	static public $postType = 'getwid_template_part';
+	public $postType = 'getwid_template_part';
 
 	/**
 	 * PostTemplatePart constructor.
 	 */
 	public function __construct() {
-		$settings = Settings::getInstance();
-
-		$this->version = $settings->getVersion();
-		$this->prefix  = $settings->getPrefix();		
 
 		add_action( 'init', [ $this, 'register_post_type' ] );
 	}
 
-	public function register_post_type(){ 			
+	public function register_post_type(){
 		$labels = array(
 			'name' => __( 'Templates', 'getwid' ),
 			'singular_name' => __( 'Template', 'getwid' ),
@@ -56,7 +49,7 @@ class PostTemplatePart {
 				'title',
 				'editor',
 				'author',
-				'revisions',	
+				'revisions',
 			),
 			'capabilities'        => array(
 				'publish_posts'       => 'administrator',
@@ -68,7 +61,7 @@ class PostTemplatePart {
 				// 'edit_posts' 		  => 'administrator',
 				'delete_post'         => 'administrator',
 				'read_post'           => 'administrator',
-				'create_posts'       => 'administrator', 
+				'create_posts'       => 'administrator',
 			),
 			'rewrite' => false,
 			'show_in_rest' => true,
@@ -80,7 +73,7 @@ class PostTemplatePart {
 			),
 		);
 
-		register_post_type( self::$postType, $args );
+		register_post_type( $this->postType, $args );
 	}
 
 }

@@ -2,8 +2,8 @@
 
 namespace Getwid;
 
-class VersionControl
-{
+class VersionControl {
+
     /** @var string */
     protected $pluginVersion = '';
 
@@ -14,7 +14,8 @@ class VersionControl
     protected $needUpgrade = false;
 
     public function __construct(){
-        $settings = Settings::getInstance();
+
+		$settings = getwid()->settings();
 
         $this->pluginVersion = $settings->getVersion();
 

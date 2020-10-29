@@ -4,6 +4,17 @@
  */
 jQuery(function ($) {
 
+	// Sync Number field's options with hidden corresponding elements.
+	$( document.body ).on( 'input', '.ur_advance_setting.ur-settings-min', function() {
+		$( '.ur-selected-item.ur-item-active .ur_advance_setting.ur-settings-min' ).val( $(this).val() );
+	});
+	$( document.body ).on( 'input', '.ur_advance_setting.ur-settings-max', function() {
+		$( '.ur-selected-item.ur-item-active .ur_advance_setting.ur-settings-max' ).val( $(this).val() );
+	});
+	$( document.body ).on( 'input', '.ur_advance_setting.ur-settings-step', function() {
+		$( '.ur-selected-item.ur-item-active .ur_advance_setting.ur-settings-step' ).val( $(this).val() );
+	});
+
 	// Bind UI Action handlers for searching fields.
 	$( document.body ).on( 'input', '#ur-search-fields', function() {
 		var search_string = $( this ).val().toLowerCase();
@@ -90,28 +101,39 @@ jQuery(function ($) {
 	}).trigger( 'ur_adjust_builder_width' );
 
 	// Form name edit.
-	$( document.body ).on( 'click', '.ur-form-container .ur-registered-from .ur-form-name-wrapper .ur-edit-form-name', function() {
-		var $input = $(this).siblings( '#ur-form-name' );
-		if( ! $input.hasClass( 'ur-editing' ) ) {
+	$( document.body ).on( 'click', '.user-registration-editable-title__icon', function() {
+		var $input = $(this).siblings( '.user-registration-editable-title__input' );
+		if( ! $input.hasClass( 'is-editing' ) ) {
 			$input.focus();
 		}
-		$input.toggleClass( 'ur-editing' );
+		$input.toggleClass( 'is-editing' );
+		$input.attr('data-editing', $input.attr('data-editing') == 'true' ? 'false' : 'true');
 	} );
+
+	// In case the user goes out of focus from title edit state.
+	$( document.body ).not( $( '.user-registration-editable-title' ) ).click( function( e ) {
+		var field = $( '.user-registration-editable-title__input' );
+
+		// Both of these controls should in no way allow stopping event propagation.
+		if( 'ur-form-name' === e.target.id || 'ur-form-name-edit-button' === e.target.id ) {
+			return;
+		}
+
+		if ( ! field.attr('hidden') && field.hasClass('is-editing') ) {
+			e.stopPropagation();
+
+			// Only allow flipping state if currently editing.
+			if ( 'true' !== field.data( 'data-editing' ) && field.val() && '' !== field.val().trim() ) {
+				field.toggleClass( 'is-editing' ).trigger( 'blur' ).attr('data-editing', field.attr('data-editing') == 'true' ? 'false' : 'true');
+			}
+		}
+	});
 
 	$( document ).on( 'init_perfect_scrollbar update_perfect_scrollbar', function() {
 
 		// Init perfect Scrollbar.
 		if ( 'undefined' !== typeof PerfectScrollbar ) {
-			var builder_wrapper = $( '.ur-builder-wrapper' ),
-				tab_content = $( '.ur-tab-contents' );
-
-			if( builder_wrapper.length >= 1 && 'undefined' === typeof window.ur_builder_scrollbar ) {
-				window.ur_builder_scrollbar = new PerfectScrollbar( builder_wrapper.selector, {
-					suppressScrollX: true
-				} );
-			} else if( 'undefined' !== typeof window.ur_builder_scrollbar ) {
-				window.ur_builder_scrollbar.update();
-			}
+			var tab_content = $( '.ur-tab-contents' );
 
 			if( tab_content.length >= 1 && 'undefined' === typeof window.ur_tab_scrollbar ) {
 				window.ur_tab_scrollbar = new PerfectScrollbar( tab_content.selector, {
@@ -226,17 +248,8 @@ jQuery(function ($) {
 
 	// Tooltips
 	$(document.body).on('init_tooltips', function () {
-		var tiptip_args = {
-			'attribute': 'data-tip',
-			'fadeIn': 50,
-			'fadeOut': 50,
-			'delay': 200,
-			'keepAlive': true
-		};
-		$('.tips, .help_tip, .user-registration-help-tip').tipTip(tiptip_args);
-
-		tiptip_args['keepAlive'] = false;
-		$('.ur-copy-shortcode').tipTip(tiptip_args);
+		ur_init_tooltips( '.tips, .help_tip, .user-registration-help-tip' );
+		ur_init_tooltips( '.ur-copy-shortcode, #ur-setting-form .ur-portal-tooltip', { keepAlive: false });
 
 		// Add tiptip to parent element for widefat tables
 		$('.parent-tips').each(function () {
@@ -409,6 +422,8 @@ jQuery(function ($) {
 								manage_conditional_field_options(populated_item);
 
 								$( '.ur-input-type-select2 .ur-field[data-field-key="select2"] select, .ur-input-type-multi-select2 .ur-field[data-field-key="multi_select2"] select' ).selectWoo();
+
+								$( document.body ).trigger( 'ur_new_field_created' );
 							}
 						});
 					},
@@ -457,7 +472,7 @@ jQuery(function ($) {
 						$('body').on('click', '.ur-remove-row', function () {
 							if ($('.ur-input-grids').find('.ur-single-row:visible').length > 1) {
 								var $this_row = $( this );
-								ur_confirmation( i18n_admin.i18n_are_you_sure_want_to_delete, {
+								ur_confirmation( user_registration_admin_data.i18n_admin.i18n_are_you_sure_want_to_delete, {
 									confirm: function() {
 										var btn = $this_row.prev();
 										var new_btn;
@@ -471,9 +486,32 @@ jQuery(function ($) {
 										}
 										var single_row = $this_row.closest('.ur-single-row');
 										$( document ).trigger( 'user_registration_row_deleted', [ single_row ] );
+
+										// Remove Row Fields from Conditional Select Dropdown.
+										var row_fields = single_row.find('.ur-grid-lists .ur-selected-item .ur-general-setting');
+										$( row_fields ).each( function () {
+											var field_label = $(this).closest('.ur-selected-item').find(' .ur-admin-template .ur-label label').text();
+											var field_key = $(this).closest('.ur-selected-item').find(' .ur-admin-template .ur-field').data('field-key');
+
+											//strip certain fields
+											if ('section_title' == field_key || 'html' == field_key || 'wysiwyg' == field_key || 'billing_address_title' == field_key || 'shipping_address_title' == field_key) {
+												return;
+											}
+
+											var field_name = $(this).find("[data-field='field_name']").val();
+
+											if (typeof field_name !== 'undefined') {
+												// Remove item from conditional logic options
+												$('[class*="urcl-settings-rules_field_"] option[value="' + field_name + '"]').remove();
+
+												// Remove Field from Form Setting Conditionally Assign User Role.
+												$('[class*="urcl-field-conditional-field-select"] option[value="' + field_name + '"]').remove();
+											}
+										});
 										single_row.remove();
 										$this.check_grid();
 										manage_draggable_users_fields();
+
 										Swal.fire({
 											type: 'success',
 											title: 'Successfully deleted!',
@@ -481,9 +519,12 @@ jQuery(function ($) {
 											timer: 1000
 										});
 									},
+									reject: function() {
+										// Do Nothing.
+									}
 								} );
 							} else {
-								ur_alert( i18n_admin.i18n_at_least_one_row_need_to_select )
+								ur_alert( user_registration_admin_data.i18n_admin.i18n_at_least_one_row_need_to_select )
 							}
 						});
 					},
@@ -501,7 +542,9 @@ jQuery(function ($) {
 						$( document ).on( 'click', '.ur-grids .ur-toggle-grid-content .ur-grid-selector', function() {
 							var $this_single_row = $( this ).closest( '.ur-single-row' ),
 								grid_num = $( this ).attr( 'data-grid' ),
-								$grids = builder.get_grid_lists(grid_num);
+								grid_comp = $this_single_row.find('.ur-grid-lists .ur-grid-list-item').length,
+								$grids = builder.get_grid_lists(grid_num),
+								iterator = 0;
 
 							// Prevent from selecting same grid.
 							if( $this_single_row.find( '.ur-grid-lists .ur-grid-list-item' ).length === parseInt( grid_num ) ) {
@@ -512,9 +555,21 @@ jQuery(function ($) {
 
 							$.each($this_single_row.find('.ur-grid-lists .ur-grid-list-item'), function () {
 								$(this).children('*').each(function () {
-									$grids.find('.ur-grid-list-item').eq(0).append($(this).clone());  // "this" is the current element in the loop
+									$grids.find('.ur-grid-list-item').eq(iterator).append($(this).clone());  // "this" is the current element in the loop.
+
+									// In case the fields have to be redistributed into 2 columns - prioritizes left column first, if 3rd column is going away.
+									if ( 3 === parseInt( $(this).parent().attr('ur-grid-id') ) && 3 === parseInt( grid_comp ) && 2 === parseInt( grid_num ) ) {
+										iterator = Math.abs( --iterator ); // Alternates between 0 and 1.
+									}
 								});
+
+								// Decides to check if it's trying to push into lower amount of columns.
+								// If so, it simply resets the index to 0 to disallow elements from removed rows.
+								if( ( parseInt( grid_num ) > grid_comp ) || ( ( $(this).children('*').length ) && ( 2 <= parseInt( grid_num ) ) ) ) {
+									iterator =  parseInt( grid_num ) <= ( ++iterator ) ? 0 : iterator;
+								}
 							});
+
 							$this_single_row.find('.ur-grid-lists').eq(0).hide();
 							$grids.clone().insertAfter($this_single_row.find('.ur-grid-lists'));
 							$this_single_row.find('.ur-grid-lists').eq(0).remove();
@@ -566,7 +621,7 @@ jQuery(function ($) {
 								var length_of_required = $('.ur-input-grids').find('.ur-field[data-field-key="' + data_field_id + '"]').length;
 								var only_one_field_index = $.makeArray(user_registration_admin_data.form_one_time_draggable_fields);
 								if (length_of_required > 0 && $.inArray(data_field_id, only_one_field_index) >= 0) {
-									show_message(i18n_admin.i18n_user_required_field_already_there);
+									show_message(user_registration_admin_data.i18n_admin.i18n_user_required_field_already_there);
 									$(ui.helper).remove();
 									return;
 								}
@@ -582,25 +637,50 @@ jQuery(function ($) {
 					remove_selected_item: function () {
 						var $this = this;
 						$('body').on('click', '.ur-selected-item .ur-action-buttons  .ur-trash', function ( e ) {
-							var removed_item = $(this).closest('.ur-selected-item ').find("[data-field='field_name']").val();
-							$(this).closest('.ur-selected-item ').remove();
-							$this.check_grid();
-							builder.manage_empty_grid();
-							manage_draggable_users_fields();
+							var removed_item = $(this).closest('.ur-selected-item ').find("[data-field='field_name']").val(),
+								ele = $this,
+								$ele = $(this);
 
-							//remove item from conditional logic options
-							jQuery('[class*="urcl-settings-rules_field_"] option[value="' + removed_item + '"]').remove();
+							ur_confirmation(
+								user_registration_admin_data.i18n_admin.i18n_are_you_sure_want_to_delete,
+								{
+									title:             user_registration_admin_data.i18n_admin.i18n_msg_delete,
+									showCancelButton:  true,
+									confirmButtonText: user_registration_admin_data.i18n_admin.i18n_choice_ok,
+									cancelButtonText:  user_registration_admin_data.i18n_admin.i18n_choice_cancel,
+									ele:               ele,
+									$ele:              $ele,
+									removed_item:      removed_item,
+									confirm: function() {
+										$ele.closest('.ur-selected-item ').remove();
+										ele.check_grid();
+										builder.manage_empty_grid();
+										manage_draggable_users_fields();
 
-							return false; // To prevent click on whole item.
+										// Remove item from conditional logic options
+										$('[class*="urcl-settings-rules_field_"] option[value="' + removed_item + '"]').remove();
+
+										// Remove Field from Form Setting Conditionally Assign User Role.
+										$('[class*="urcl-field-conditional-field-select"] option[value="' + removed_item + '"]').remove();
+
+										// To prevent click on whole item.
+										return false;
+									},
+									reject: function() {
+										return false;
+									}
+								}
+							);
 						});
 					},
+
 					clone_selected_item: function () {
 						$('body').on('click', '.ur-selected-item .ur-action-buttons  .ur-clone', function () {
 							var data_field_key = $(this).closest('.ur-selected-item ').find('.ur-field').attr('data-field-key');
 							var selected_node = $('.ur-input-grids').find('.ur-field[data-field-key="' + data_field_key + '"]');
 							var length_of_required = selected_node.length;
 							if (length_of_required > 0 && $.inArray(data_field_key, user_registration_admin_data.form_one_time_draggable_fields) > -1) {
-								show_message(i18n_admin.i18n_user_required_field_already_there_could_not_clone);
+								show_message(user_registration_admin_data.i18n_admin.i18n_user_required_field_already_there_could_not_clone);
 								return;
 							}
 							var clone = $(this).closest('.ur-selected-item ').clone();
@@ -611,6 +691,9 @@ jQuery(function ($) {
 							var label_string = label_node.val().replace(find_string, '');
 							clone.find('input[data-field="field_name"]').attr('value', label_string + new Date().getTime());
 							$(this).closest('.ur-grid-list-item').append(clone);
+
+							var populated_item = clone.find("[data-field='field_name']").val();
+								manage_conditional_field_options(populated_item);
 						});
 					},
 					check_grid: function () {
@@ -794,6 +877,30 @@ jQuery(function ($) {
 						return "Selected " + length + " country(s)";
 					},
 				})
+				.on( 'change', function( e ) {
+					$( '.urcl-rules, .urcl-conditional-group' ).each( function() {
+						var $urcl_field = $( this ).find( '.urcl-field' ).length ? $( this ).find( '.urcl-field' ) : $( this ).find( '.urcl-form-group' );
+						var type = $urcl_field.find( 'select option:selected' ).data( 'type' );
+
+						if ( 'country' === type || 'billing_country' === type || 'shipping_country' === type ) {
+							var field_name = $urcl_field.find( 'select option:selected' ).val();
+							var selected_value = $( this ).find( '.urcl-value select' ).val();
+							var countries = $( '.ur-general-setting-field-name input[value="' + field_name + '"' ).closest( '.ur-selected-item' ).find( '.ur-advance-selected_countries select option:selected' );
+							var options_html = [];
+
+							$( this ).find( '.urcl-value select' ).html( '<option value="">--select--</option>' );
+							countries.each( function() {
+								var country_iso = $( this ).val();
+								var country_name = $( this ).text();
+
+								options_html.push( '<option value="' + country_iso + '">' + country_name + '</option>' );
+							});
+							$( this ).find( '.urcl-value select' ).append( options_html.join('') );
+							$( this ).find( '.urcl-value select' ).val( selected_value );
+							$( this ).find( '.urcl-value select option[value="' + selected_value + '"]' ).attr( 'selected', 'selected' );
+						}
+					});
+				})
 				/**
 				 * The following block of code is required to fix the following issue:
 				 * - When the dropdown is open, if the contents of this option's container changes, for example when a different field is
@@ -808,6 +915,9 @@ jQuery(function ($) {
 					}, 1 );
 				});
 			}
+
+			$( document.body ).trigger( 'ur_rendered_field_options' );
+			$( document.body ).trigger( 'init_tooltips' );
 		});
 		function render_advance_setting(selected_obj) {
 			var advance_setting = selected_obj.find('.ur-advance-setting-block').clone();
@@ -863,6 +973,7 @@ jQuery(function ($) {
 
 					$('.ur-export-users-page').prepend(message_string);
 					$('#jsonfile').val("");
+					$( '.user-registration-custom-selected-file' ).html( user_registration_admin_data.no_file_selected );
 				}
 			});
 		});
@@ -947,7 +1058,7 @@ jQuery(function ($) {
 			complete: function (response) {
 				$('.ur_save_form_action_button').find('.ur-spinner').remove();
 				if (response.responseJSON.success === true) {
-					var success_message = i18n_admin.i18n_form_successfully_saved;
+					var success_message = user_registration_admin_data.i18n_admin.i18n_form_successfully_saved;
 
 					if ( user_registration_admin_data.is_edit_form !== '1' ) {
 						var title = "Form successfully created."
@@ -994,9 +1105,9 @@ jQuery(function ($) {
 		}
 
 		if( 'success' === type ) {
-			message_string = '<div class="ur-message"><div class="ur-success"><p><strong>' + i18n_admin.i18n_success + '! </strong>' + message + '</p><span class="dashicons dashicons-no-alt ur-message-close"></span></div></div>';
+			message_string = '<div class="ur-message"><div class="ur-success"><p><strong>' + user_registration_admin_data.i18n_admin.i18n_success + '! </strong>' + message + '</p><span class="dashicons dashicons-no-alt ur-message-close"></span></div></div>';
 		} else {
-			message_string = '<div class="ur-message"><div class="ur-error"><p><strong>' + i18n_admin.i18n_error + '! </strong>' + message + '</p><span class="dashicons dashicons-no-alt ur-message-close"></span></div></div>';
+			message_string = '<div class="ur-message"><div class="ur-error"><p><strong>' + user_registration_admin_data.i18n_admin.i18n_error + '! </strong>' + message + '</p><span class="dashicons dashicons-no-alt ur-message-close"></span></div></div>';
 		}
 
 		var $message = $( message_string ).prependTo( $message_container );
@@ -1025,17 +1136,17 @@ jQuery(function ($) {
 		};
 		if ($('.ur-selected-item').length === 0) {
 			response.validation_status = false;
-			response.message = i18n_admin.i18n_at_least_one_field_need_to_select;
+			response.message = user_registration_admin_data.i18n_admin.i18n_at_least_one_field_need_to_select;
 			return response;
 		}
 		if ($('#ur-form-name').val() === '') {
 			response.validation_status = false;
-			response.message = i18n_admin.i18n_empty_form_name;
+			response.message = user_registration_admin_data.i18n_admin.i18n_empty_form_name;
 			return response;
 		}
 		if ($('.ur_save_form_action_button').find('.ur-spinner').length > 0) {
 			response.validation_status = false;
-			response.message = i18n_admin.i18n_previous_save_action_ongoing;
+			response.message = user_registration_admin_data.i18n_admin.i18n_previous_save_action_ongoing;
 			return response;
 		}
 		$.each($( '.ur-selected-item select.ur-settings-selected-countries' ), function () {
@@ -1045,7 +1156,7 @@ jQuery(function ($) {
 				( Array.isArray( selected_countries ) && selected_countries.length === 0 )
 			) {
 				response.validation_status = false;
-				response.message = i18n_admin.i18n_select_countries;
+				response.message = user_registration_admin_data.i18n_admin.i18n_select_countries;
 				return response;
 			}
 		});
@@ -1057,17 +1168,17 @@ jQuery(function ($) {
 				var field_value = $field.val();
 				var length = $('.ur-input-grids .ur-general-setting-block').find('input[data-field="field_name"][value="' + field_value + '"]').length;
 				if (length > 1) {
-					throw i18n_admin.i18n_duplicate_field_name;
+					throw user_registration_admin_data.i18n_admin.i18n_duplicate_field_name;
 				}
 				if ($field.closest('.ur-general-setting-block').find('input[data-field="label"]').val() === '') {
 					$field = $field.closest('.ur-general-setting-block').find('input[data-field="label"]');
-					throw i18n_admin.i18n_empty_field_label;
+					throw user_registration_admin_data.i18n_admin.i18n_empty_field_label;
 				}
 				var field_regex = /[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/gm;
 				var regex_result = field_value.match(field_regex);
 				if (regex_result !== null && regex_result.length === 1 && regex_result[0] === field_value) {
 				} else {
-					throw i18n_admin.i18n_invald_field_name;
+					throw user_registration_admin_data.i18n_admin.i18n_invald_field_name;
 				}
 			} catch (err) {
 				response.validation_status = false;
@@ -1078,7 +1189,7 @@ jQuery(function ($) {
 				setTimeout(function () {
 					$('#ur-setting-form').find('input[data-field="' + field_attribute + '"]').removeAttr('style');
 				}, 2000);
-				need_to_break = true;  //console.log('User registration console ' + $field.closest('.ur-selected-item').find('.ur-label label').text());
+				need_to_break = true;
 			}
 			if (need_to_break) {
 				return false;
@@ -1087,7 +1198,7 @@ jQuery(function ($) {
 		for (var single_field = 0; single_field < only_one_field_index.length; single_field++) {
 			if ($('.ur-input-grids').find('.ur-field[data-field-key="' + only_one_field_index[single_field] + '"]').length > 1) {
 				response.validation_status = false;
-				response.message = i18n_admin.i18n_multiple_field_key + only_one_field_index[single_field];
+				response.message = user_registration_admin_data.i18n_admin.i18n_multiple_field_key + only_one_field_index[single_field];
 				break;
 			}
 		}
@@ -1097,12 +1208,12 @@ jQuery(function ($) {
 				response.validation_status = false;
 
 				if (required_index === 0) {
-					var field = i18n_admin.i18n_user_email;
+					var field = user_registration_admin_data.i18n_admin.i18n_user_email;
 				} else if (required_index === 1) {
-					var field = i18n_admin.i18n_user_password;
+					var field = user_registration_admin_data.i18n_admin.i18n_user_password;
 				}
 
-				response.message = field + ' ' + i18n_admin.i18n_field_is_required;
+				response.message = field + ' ' + user_registration_admin_data.i18n_admin.i18n_field_is_required;
 				break;
 			}
 		}
@@ -1224,19 +1335,24 @@ jQuery(function ($) {
 			var is_checkbox = $(this).closest('.ur-general-setting').hasClass('ur-setting-checkbox');
 
 			if( 'options' === $(this).attr('data-field') ) {
-				general_setting_data['options'] = option_values.push( get_ur_data($(this) ) );
-				general_setting_data['options'] = option_values;
+				var choice_value = $.trim( get_ur_data($(this)) );
+				if( option_values.every( function(each_value) { return  each_value !== choice_value })){
+					general_setting_data['options'] = option_values.push( choice_value );
+					general_setting_data['options'] = option_values;
+				}
+
 			} else {
 
 				if( 'default_value' === $(this).attr('data-field') ) {
 
 					if( is_checkbox === true ) {
+
 						if( $(this).is(":checked") ) {
 							general_setting_data['default_value'] = default_values.push( get_ur_data( $(this)));
 							general_setting_data['default_value'] = default_values;
 						}
 					} else if( $(this).is(":checked") ) {
-							general_setting_data['default_value'] = get_ur_data($(this) );
+						general_setting_data['default_value'] = get_ur_data($(this) );
 					}
 
 				} else if ( 'html' === $(this).attr('data-field') ) {
@@ -1246,8 +1362,6 @@ jQuery(function ($) {
 				}
 			}
 		});
-
-
 		return general_setting_data;
 	}
 
@@ -1263,9 +1377,21 @@ jQuery(function ($) {
 	function get_ur_data($this_node) {
 		var node_type = $this_node.get(0).tagName.toLowerCase();
 		var value = '';
+
 		switch (node_type) {
 			case 'input':
-				value = $this_node.val();
+				// Check input type.
+				switch ( $this_node.attr( 'type' ) ) {
+					case 'checkbox':
+						if( $this_node.is( ':checked' ) ){
+							value = $this_node.val();
+						}
+						break;
+
+					default:
+						value = $this_node.val();
+						break;
+				}
 				break;
 			case 'select':
 				value = $this_node.val();
@@ -1289,6 +1415,7 @@ jQuery(function ($) {
 					});
 					break;
 				case 'field_name':
+				case 'max_files':
 				case 'input_mask':
 					$this_obj.on('change', function () {
 						trigger_general_setting_field_name($(this));
@@ -1344,42 +1471,37 @@ jQuery(function ($) {
 					break;
 			}
 		});
-		var advance_settings = $('.ur_advance_setting');
+		var advance_settings = $('#ur-setting-form .ur_advance_setting');
 
 		$('.ur-settings-enable-min-max').on('change', function () {
 			if('true' === $(this).val()){
-				$('.ur-advance-min_date').show();
-				$('.ur-advance-max_date').show();
-				if('' === $('.ur-settings-min-date').val()){
-					$('.ur-settings-min-date').addClass('flatpickr-field').flatpickr({
-						disableMobile : true,
-						static        : true,
-						onChange      : function(selectedDates, dateStr, instance) {
-							$('.ur-settings-min-date').val(dateStr);
-						},
-						onOpen: function(selectedDates, dateStr, instance) {
-							instance.set('maxDate', new Date($('.ur-settings-max-date').val()));
-						},
-					});
-				}
-				if('' === $('.ur-settings-max-date').val()){
-					$('.ur-settings-max-date').addClass('flatpickr-field').flatpickr({
-						disableMobile : true,
-						static        : true,
-						onChange      : function(selectedDates, dateStr, instance) {
-							$('.ur-settings-max-date').val(dateStr);
-						},
-						onOpen: function(selectedDates, dateStr, instance) {
-							instance.set('minDate', new Date($('.ur-settings-min-date').val()));
-						},
-					});
-				}
+				$('.ur-item-active .ur-advance-min_date, #ur-setting-form .ur-advance-min_date').show();
+				$('.ur-item-active .ur-advance-max_date, #ur-setting-form .ur-advance-max_date').show();
 
+				$('#ur-setting-form .ur-settings-min-date').addClass('flatpickr-field').flatpickr({
+					disableMobile : true,
+					static        : true,
+					onChange      : function(selectedDates, dateStr, instance) {
+						$('.ur-item-active .ur-settings-min-date').val(dateStr);
+					},
+					onOpen: function(selectedDates, dateStr, instance) {
+						instance.set('maxDate', new Date($('.ur-item-active .ur-settings-max-date').val()));
+					},
+				});
+
+				$('#ur-setting-form .ur-settings-max-date').addClass('flatpickr-field').flatpickr({
+					disableMobile : true,
+					static        : true,
+					onChange      : function(selectedDates, dateStr, instance) {
+						$('.ur-item-active .ur-settings-max-date').val(dateStr);
+					},
+					onOpen: function(selectedDates, dateStr, instance) {
+						instance.set('minDate', new Date($('.ur-item-active .ur-settings-min-date').val()));
+					},
+				});
 			}else{
-				$('.ur-advance-min_date').hide();
-				$('.ur-advance-max_date').hide();
-				$('.ur-settings-min-date').val('');
-				$('.ur-settings-max-date').val('');
+				$('.ur-item-active .ur-advance-min_date, #ur-setting-form .ur-advance-min_date').hide();
+				$('.ur-item-active .ur-advance-max_date, #ur-setting-form .ur-advance-max_date').hide();
 			}
 		});
 
@@ -1392,39 +1514,37 @@ jQuery(function ($) {
 					});
 					break;
 				case 'min_date':
-					if('true' === $('.ur-settings-enable-min-max').val()){
+					if('true' === $('.ur-item-active').find('.ur-settings-enable-min-max').val()){
 						$(this).addClass('flatpickr-field').flatpickr({
 							disableMobile : true,
 							static        : true,
-							defaultDate   : new Date($('.ur-settings-min-date').val()),
+							defaultDate   : new Date($('.ur-item-active').find('.ur-settings-min-date').val()),
 							onChange      : function(selectedDates, dateStr, instance) {
-								$('.ur-settings-min-date').val(dateStr);
+								$('.ur-item-active').find('.ur-settings-min-date').val(dateStr);
 							},
 							onOpen: function(selectedDates, dateStr, instance) {
-								instance.set('maxDate', new Date($('.ur-settings-max-date').val()));
+								instance.set('maxDate', new Date($('.ur-item-active').find('.ur-settings-max-date').val()));
 							},
 						});
 					}else{
-						$('.ur-advance-min_date').hide();
-						$('.ur-settings-min-date').val('');
+						$('.ur-item-active .ur-advance-min_date, #ur-setting-form .ur-advance-min_date').hide();
 					}
 					break;
 				case 'max_date':
-					if('true' === $('.ur-settings-enable-min-max').val()){
+					if('true' === $('.ur-item-active').find('.ur-settings-enable-min-max').val()){
 						$(this).addClass('flatpickr-field').flatpickr({
 							disableMobile : true,
 							static        : true,
-							defaultDate   : new Date($('.ur-settings-max-date').val()),
+							defaultDate   : new Date($('.ur-item-active').find('.ur-settings-max-date').val()),
 							onChange      : function(selectedDates, dateStr, instance) {
-								$('.ur-settings-max-date').val(dateStr);
+								$('.ur-item-active').find('.ur-settings-max-date').val(dateStr);
 							},
 							onOpen: function(selectedDates, dateStr, instance) {
-								instance.set('minDate', new Date($('.ur-settings-min-date').val()));
+								instance.set('minDate', new Date($('.ur-item-active .ur-settings-min-date').val()));
 							},
 						});
 					}else{
-						$('.ur-advance-max_date').hide();
-						$('.ur-settings-max-date').val('');
+						$('.ur-item-active .ur-advance-max_date, #ur-setting-form .ur-advance-max_date').hide();
 					}
 					break;
 			}
@@ -1469,12 +1589,7 @@ jQuery(function ($) {
 
 				if ( $this_node.prop('multiple') ) {
 					var selected_options = $this_node.val();
-
-					if ( Array.isArray( selected_options ) ) {
-						selected_options.forEach( function( value ) {
-							hidden_node.find( 'option[value="' + value + '"]' ).attr( 'selected', 'selected' );
-						});
-					}
+					hidden_node.val( selected_options );
 				} else {
 					hidden_node.find('option[value="' + $this_node.val() + '"]').attr( 'selected', 'selected' );
 				}
@@ -1506,12 +1621,15 @@ jQuery(function ($) {
 		var array_value = [];
 		var li_elements = this_node.closest('ul').find('li');
 		var checked_index = this_node.closest('li').index();
-
 		li_elements.each( function( index, element) {
 			var value 	 = $( element ).find('input.ur-type-checkbox-label').val();
 				value 	 = $.trim(value);
 				checkbox = $( element ).find('input.ur-type-checkbox-value').is( ':checked' );
-				array_value.push( {value:value, checkbox:checkbox });
+
+				if( array_value.every( function(each_value) { return  each_value.value !== value })){
+					array_value.push({value:value, checkbox:checkbox });
+				}
+
 		});
 
 		var wrapper = $('.ur-selected-item.ur-item-active');
@@ -1519,15 +1637,17 @@ jQuery(function ($) {
 		checkbox.html('');
 
 		for (var i = 0; i < array_value.length; i++) {
-			if (array_value[i] !== '') {
+			if ( array_value[i] !== '' ) {
 				checkbox.append('<label><input value="' + array_value[i].value.trim() + '" type="checkbox" ' + ( (array_value[i].checkbox) ? 'checked' : '' ) + ' disabled>' + array_value[i].value.trim() + '</label>');
 			}
 		}
 
-		if( this_node.is( ':checked' ) ) {
-			wrapper.find('.ur-general-setting-options li:nth(' + checked_index + ') input[data-field="default_value"]').attr( 'checked', 'checked' );
-		} else {
-			wrapper.find('.ur-general-setting-options li:nth(' + checked_index + ') input[data-field="default_value"]').removeAttr( 'checked' );
+		if ( 'checkbox' === this_node.attr( 'type' ) ) {
+			if( this_node.is( ':checked' ) ) {
+				wrapper.find('.ur-general-setting-options li:nth(' + checked_index + ') input[data-field="default_value"]').prop("checked", true);
+			} else {
+				wrapper.find('.ur-general-setting-options li:nth(' + checked_index + ') input[data-field="default_value"]').removeAttr( 'checked' );
+			}
 		}
 	}
 
@@ -1544,7 +1664,10 @@ jQuery(function ($) {
 			if( radio === true) {
 				checked_index = index;
 			}
-			array_value.push({value:value, radio:radio });
+
+			if( array_value.every( function(each_value) { return  each_value.value !== value })){
+				array_value.push({value:value, radio:radio });
+			}
 		});
 
 		var wrapper = $('.ur-selected-item.ur-item-active');
@@ -1561,7 +1684,7 @@ jQuery(function ($) {
 		wrapper.find( '.ur-general-setting-options > ul.ur-options-list > li' ).each( function( index, element ) {
 			var radio_input = $(element).find( '[data-field="default_value"]' );
 			if( index === checked_index ){
-				radio_input.attr( 'checked', 'checked' );
+				radio_input.prop("checked", true);
 			}else{
 				radio_input.removeAttr( 'checked' );
 			}
@@ -1569,7 +1692,7 @@ jQuery(function ($) {
 	}
 
 	function render_select_box(this_node) {
-		value = $.trim( this_node.val() );
+		var value = $.trim( this_node.val() );
 		var wrapper = $('.ur-selected-item.ur-item-active');
 		var checked_index = this_node.closest('li').index();
 		var select = wrapper.find('.ur-field').find('select');
@@ -1577,20 +1700,34 @@ jQuery(function ($) {
 		select.html('');
 		select.append('<option value=\'' + value + '\'>' + value + '</option>');
 
-		wrapper.find('.ur-general-setting-options li input[data-field="default_value"]').removeAttr( 'checked' );
-		wrapper.find('.ur-general-setting-options li:nth(' + checked_index + ') input[data-field="default_value"]').attr( 'checked', 'checked' );
+		// Loop through options in active fields general setting hidden div.
+		wrapper.find( '.ur-general-setting-options > ul.ur-options-list > li' ).each( function( index, element ) {
+			var radio_input = $(element).find( '[data-field="default_value"]' );
+			if( index === checked_index ){
+				radio_input.prop("checked", true);
+			}else{
+				radio_input.removeAttr( 'checked' );
+			}
+		} );
 	}
 
 	function trigger_general_setting_field_name($label) {
 		var wrapper = $('.ur-selected-item.ur-item-active');
+		var old_field_name =  wrapper.find('.ur-general-setting-block').find('input[data-field="' + $label.attr('data-field') + '"]').attr('value');
 		wrapper.find('.ur-general-setting-block').find('input[data-field="' + $label.attr('data-field') + '"]').attr('value', $label.val());
+
+		// Change Field Name of field in conditional logic options
+		$('[class*="urcl-settings-rules_field_"] option[value="' + old_field_name + '"]').attr('value', $label.val());
+
+		// Change Field Name of field in Form Setting Conditionally Assign User Role.
+		$('[class*="urcl-field-conditional-field-select"] option[value="' + old_field_name + '"]').attr('value', $label.val());
 	}
 
 	function trigger_general_setting_options($label) {
 
 		var wrapper = $('.ur-selected-item.ur-item-active');
 		var index = $label.closest('li').index();
-		wrapper.find( '.ur-general-setting-block li:nth(' + index + ') input[data-field="' + $label.attr('data-field') + '"]' ).attr( 'value', $label.val() );
+		wrapper.find( '.ur-general-setting-block li:nth(' + index + ') input[data-field="' + $label.attr('data-field') + '"]' ).val( $label.val() );
 		wrapper.find( '.ur-general-setting-block li:nth(' + index + ') input[data-field="default_value"]' ).val( $label.val() );
 		$label.closest('li').find('[data-field="default_value"]').val( $label.val() );
 	}
@@ -1599,8 +1736,14 @@ jQuery(function ($) {
 		var wrapper = $('.ur-selected-item.ur-item-active');
 		wrapper.find('.ur-label').find('label').text($label.val());
 
-		var wrapper = $('.ur-selected-item.ur-item-active');
 		wrapper.find('.ur-general-setting-block').find('input[data-field="' + $label.attr('data-field') + '"]').attr('value', $label.val());
+
+		var field_name = $('.ur-selected-item.ur-item-active .ur-general-setting').find("[data-field='field_name']").val();
+		// Change label of field in conditional logic options
+		$('[class*="urcl-settings-rules_field_"] option[value="' + field_name + '"]').text($label.val());
+
+		// Change label of field in Form Setting Conditionally Assign User Role.
+		$('[class*="urcl-field-conditional-field-select"] option[value="' + field_name + '"]').text($label.val());
 
 	}
 
@@ -1632,7 +1775,6 @@ jQuery(function ($) {
 
 	function trigger_general_setting_hide_label($label) {
 		var wrapper = $('.ur-selected-item.ur-item-active');
-		wrapper.find('.ur-label').find('label').find('span').remove();
 		wrapper.find('.ur-general-setting-block').find('select[data-field="' + $label.attr('data-field') + '"]').find('option[value="' + $label.val() + '"]').attr('selected', 'selected');
 	}
 
@@ -1683,34 +1825,40 @@ jQuery(function ($) {
 
 	function manage_conditional_field_options(populated_item) {
 
-		jQuery('.ur-grid-lists .ur-selected-item .ur-admin-template').each(function () {
-			var field_label = jQuery(this).find('.ur-label label').text();
-			var field_key = jQuery(this).find('.ur-field').attr('data-field-key');
+		$('.ur-grid-lists .ur-selected-item .ur-general-setting').each(function () {
+
+			var field_label = $(this).closest('.ur-selected-item').find(' .ur-admin-template .ur-label label').text();
+			var field_key = $(this).closest('.ur-selected-item').find(' .ur-admin-template .ur-field').data('field-key');
 
 			//strip certain fields
 			if ('section_title' == field_key || 'html' == field_key || 'wysiwyg' == field_key || 'billing_address_title' == field_key || 'shipping_address_title' == field_key) {
 				return;
 			}
 
-			var general_setting = jQuery(this).find('.ur-general-setting-block .ur-general-setting');
-			general_setting.each(function () {
-				var field_name = jQuery(this).find("[data-field='field_name']").val();
+				var field_name = $(this).find("[data-field='field_name']").val();
 				if (typeof field_name !== 'undefined') {
 
+					var select_value_for_user_role = $(".urcl-field-conditional-field-select option[value='" + field_name + "']").length > 0;
+					if ( select_value_for_user_role === false) {
+						// Append Field in Form Setting Conditionally Assign User Role.
+						$('[class*="urcl-field-conditional-field-select"]').append('<option value ="' + field_name + '" data-type="' + field_key + '">' + field_label + ' </option>');
+					}
 					//check if option exist in the given select
-					var select_value = jQuery(".urcl-rules select.ur_advance_setting.urcl-settings-rules_field_1 option[value='" + field_name + "']").length > 0;
-					if (!select_value == true) {
-						jQuery('[class*="urcl-settings-rules_field_"]').append('<option value ="' + field_name + '" data-type="' + field_key + '">' + field_label + ' </option>');
+					var select_value = $(".urcl-rules select.ur_advance_setting.urcl-settings-rules_field_1 option[value='" + field_name + "']").length > 0;
+					if ( select_value === false) {
+						// Append Field in Field Options
+						$('[class*="urcl-settings-rules_field_"]').append('<option value ="' + field_name + '" data-type="' + field_key + '">' + field_label + ' </option>');
+
 						if (field_name == populated_item) {
-							jQuery('.urcl-rules select.ur_advance_setting.urcl-settings-rules_field_1.empty-fields option[value="' + populated_item + '"]').remove();
+							$('.urcl-rules select.ur_advance_setting.urcl-settings-rules_field_1.empty-fields option[value="' + populated_item + '"]').remove();
 						}
 					} else {
-						jQuery('.urcl-rules select.ur_advance_setting.urcl-settings-rules_field_1.empty-fields').append('<option value ="' + field_name + '" data-type="' + field_key + '">' + field_label + ' </option>');
+						$('.urcl-rules select.ur_advance_setting.urcl-settings-rules_field_1.empty-fields').append('<option value ="' + field_name + '" data-type="' + field_key + '">' + field_label + ' </option>');
 					}
 				}
-			});
+
 		});
-		jQuery('.urcl-rules select.ur_advance_setting.urcl-settings-rules_field_1.empty-fields').removeClass('empty-fields');
+		$('.urcl-rules select.ur_advance_setting.urcl-settings-rules_field_1.empty-fields').removeClass('empty-fields');
 	}
 
 	function ur_math_ceil(value) {
@@ -1721,32 +1869,34 @@ jQuery(function ($) {
 		return parseInt(value, 0);
 	}
 
-	$(document).ready(function () {
+	$( document ).ready( function() {
+		var date_flatpickrs = {};
 
-		var flatpickr_loaded = false;
+		$( document.body ).on( 'click', '#load_flatpickr', function() {
+			var field_id = $( this ).data( 'id' );
+			var date_flatpickr = date_flatpickrs[ field_id ];
 
-		$('#load_flatpickr').click( function() {
-			var date_selector = $('#profile-page form#your-profile  input[type="date"]');
-			date_selector.attr('type', 'text');
-			date_selector.val( $('#formated_date').val() );
+			// Load a flatpicker for the field, if hasn't been loaded.
+			if ( ! date_flatpickr ) {
+				var formated_date = $( this ).siblings( '#formated_date' ).val() ? $( this ).siblings( '#formated_date' ).val() : $( this ).closest( '.ur-field-item' ).find( '#formatted_date' ).val();
+				var date_selector = $( '.ur-frontend-form #' + field_id + ', #fieldset-user_registration #' + field_id ).attr( 'type', 'text' ).val( formated_date );
 
-			var date_field = date_selector.attr('id');
-			var date_flatpickr;
-
-			if ( ! flatpickr_loaded ) {
-				$(this).attr('data-date-format', date_selector.data('date-format'));
-				$(this).attr('data-mode', date_selector.data('mode'));
-				$(this).attr('data-min-date', date_selector.data('min-date'));
-				$(this).attr('data-max-date', date_selector.data('max-date'));
-				$(this).attr('data-default-date', $('#formated_date').val());
-				date_flatpickr = $(this).flatpickr({
-					disableMobile: true,
-					onChange      : function(selectedDates, dateStr, instance) {
-						$('#'+ date_field).val(dateStr);
+				$( this ).attr( 'data-date-format', date_selector.data( 'date-format') );
+				$( this ).attr( 'data-mode', date_selector.data( 'mode' ) );
+				$( this ).attr( 'data-min-date', date_selector.data( 'min-date') );
+				$( this ).attr( 'data-max-date', date_selector.data( 'max-date') );
+				$( this ).attr( 'data-default-date', formated_date );
+				date_flatpickr = $( this ).flatpickr({
+					disableMobile : true,
+					onChange : function( selectedDates, dateString, instance ) {
+						$( '#' + field_id ).val( dateString );
+					},
+					onOpen: function(selectedDates, dateStr, instance) {
+						instance.set( 'minDate', date_selector.data( 'min-date') );
+						instance.set( 'maxDate', date_selector.data( 'max-date') );
 					},
 				});
-
-				flatpickr_loaded = true;
+				date_flatpickrs[ field_id ] = date_flatpickr;
 			}
 
 			if ( date_flatpickr ) {
@@ -1832,6 +1982,36 @@ jQuery(function ($) {
 	}
 }(jQuery, window.user_registration_admin_data));
 
+/**
+ * Set tooltips for specified elements.
+ *
+ * @param {String|jQuery} $elements Elements to set tooltips for.
+ * @param {JSON} options Overriding options for tooltips.
+ */
+function ur_init_tooltips( $elements, options ) {
+	if ( undefined !== $elements && null !== $elements && '' !== $elements ) {
+		var args = {
+			'attribute': 'data-tip',
+			'fadeIn': 50,
+			'fadeOut': 50,
+			'delay': 200,
+			'keepAlive': true,
+		};
+
+		if ( options && 'object' === typeof options ) {
+			Object.keys( options ).forEach( function( key ) {
+				args[ key ] = options[ key ];
+			});
+		}
+
+		if ( 'string' === typeof $elements ) {
+			jQuery( $elements ).tipTip( args );
+		} else {
+			$elements.tipTip( args );
+		}
+	}
+}
+
 function ur_alert( message, options ) {
 	if( 'undefined' === typeof options ) {
 		options = {};
@@ -1852,8 +2032,8 @@ function ur_confirmation( message, options ) {
 		text: message,
 		type: ( 'undefined' !== typeof options.type ) ? options.type : 'warning',
 		showCancelButton: ( 'undefined' !== typeof options.showCancelButton ) ? options.showCancelButton : true,
-		confirmButtonText: ( 'undefined' !== typeof options.confirmButtonText ) ? options.confirmButtonText : 'OK',
-		cancelButtonText: ( 'undefined' !== typeof options.cancelButtonText ) ? options.cancelButtonText :'Cancel',
+		confirmButtonText: ( 'undefined' !== typeof options.confirmButtonText ) ? options.confirmButtonText : user_registration_admin_data.i18n_admin.i18n_choice_ok,
+		cancelButtonText: ( 'undefined' !== typeof options.cancelButtonText ) ? options.cancelButtonText : user_registration_admin_data.i18n_admin.i18n_choice_cancel,
 	}).then( function(result) {
 		if (result.value) {
 			options.confirm();

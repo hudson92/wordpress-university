@@ -39,7 +39,7 @@ function getwid_get_template_part( $slug, $attributes = array(), $extract = fals
 
     if ( !empty( $template ) ) {
 	    if ( $attributes && is_array( $attributes ) && $extract ) {
-	        extract( $attributes );
+	        extract( $attributes, EXTR_SKIP );
 	    }
 
 	    require $template;
@@ -226,15 +226,15 @@ function getwid_custom_gradient_styles($prefix = 'foreground', &$style = '', $at
  */
 function getwid_build_custom_post_type_query(&$query_args = [], $attributes, $options = []){
 
-    if ((isset($attributes['filterById']) && $attributes['filterById'] != '') || (isset($attributes['parentPageId']) && $attributes['parentPageId'] !='' ) || isset($attributes['postType'])){
+    if ((isset($attributes['filterById']) && $attributes['filterById'] != '') || (isset($attributes['parentPageId']) && $attributes['parentPageId'] != '' ) || isset($attributes['postType'])){
 
         $query_args = array(
             'posts_per_page'   => $attributes['postsToShow'],
             'ignore_sticky_posts' => 1,
             'post_status'      => 'publish',
             'order'            => $attributes['order'],
-            'orderby'          => $attributes['orderBy'],
-        );
+			'orderby'          => $attributes['orderBy'],
+		);
 
         if ( isset($attributes['ignoreSticky']) ){
             $query_args['ignore_sticky_posts'] = $attributes['ignoreSticky'];
@@ -243,7 +243,12 @@ function getwid_build_custom_post_type_query(&$query_args = [], $attributes, $op
         $paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
         if ( isset($attributes['pagination']) && $attributes['pagination'] ){
             $query_args['paged'] = $paged;
-        }
+		}
+
+		if ($attributes['offset'] != 0){
+			$offset = ( $paged - 1 ) * $attributes['postsToShow'] + $attributes['offset'];
+			$query_args['offset'] = $offset;
+		}
 
     }
 
@@ -268,11 +273,11 @@ function getwid_build_custom_post_type_query(&$query_args = [], $attributes, $op
         $ids_arr = array_map( 'intval', explode(',', $attributes['filterById']) );
         $query_args['post__in'] = $ids_arr;
 
-    } else if (isset($attributes['parentPageId']) && $attributes['parentPageId'] !='' ){
+    } else if ((isset($attributes['parentPageId']) && $attributes['parentPageId'] !='') || $attributes['childPagesCurrentPage'] ){
 
         $query_args['post_type'] = 'page';
         if ($attributes['postType'] == 'page'){
-            $query_args['post_parent'] = intval($attributes['parentPageId']);
+			$query_args['post_parent'] = $attributes['childPagesCurrentPage'] ? get_the_ID() : intval($attributes['parentPageId']);
         }
 
     }
@@ -321,3 +326,35 @@ function getwid_build_custom_post_type_query(&$query_args = [], $attributes, $op
 	}
 
 }
+
+/**
+ * Determine whether a post or content string has Getwid "nested" blocks.
+ * @since 1.5.3
+ */
+function has_getwid_nested_blocks() {
+	return getwid()->blocksManager()->hasGetwidNestedBlocks();
+}
+
+//TODO: Move/Remove?
+function getwid_log( $caller = '', $data = '' ) {
+
+	if ( ! GETWID_DEBUG ) return;
+
+	if ( ! is_admin() && ! getwid()->is_rest_api_request() ) {
+
+		echo '<small>' . $caller . ' : ';
+			echo '<code>';
+				if ( $data ) {
+					echo '<span style="color:green">';
+				} else {
+					echo '<span style="color:red">';
+				}
+				var_dump( $data );
+
+				echo '</span>';
+			echo '</code>';
+		echo '</small>';
+		echo '<br/>';
+	}
+}
+

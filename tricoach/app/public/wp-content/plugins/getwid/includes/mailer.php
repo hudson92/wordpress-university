@@ -4,6 +4,9 @@ namespace Getwid;
 
 class Mailer {
 
+	public function __construct() {
+	}
+
 	/**
 	 * Send an email.
 	 * @param string|array $to Array or comma-separated list of email addresses to send message.

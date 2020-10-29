@@ -5,7 +5,6 @@
  * @class    UR_User_Approval
  * @version  1.0.0
  * @package  UserRegistration/Classes
- * @category Class
  * @author   WPEverest
  */
 
@@ -104,8 +103,10 @@ class UR_User_Approval {
 
 		$user_manager = new UR_Admin_User_Manager( $user_id );
 
+		$user_status = $user_manager->get_user_status();
+
 		// Avoid to send multiple times the same email.
-		if ( $status === $user_manager->get_user_status() ) {
+		if ( $status === $user_status['user_status'] ) {
 			return;
 		}
 
@@ -161,23 +162,28 @@ class UR_User_Approval {
 	/**
 	 * Check the status of an user on login.
 	 *
-	 * @param WP_User $user Users.
+	 * @param mixed $user Users.
 	 * @param string  $password Password.
 	 *
 	 * @return \WP_Error
 	 */
-	public function check_status_on_login( WP_User $user, $password ) {
+	public function check_status_on_login( $user, $password ) {
+
+		if( ! $user instanceof WP_User ) {
+			return $user;
+		 }
 
 		$form_id = ur_get_form_id_by_userid( $user->ID );
 
-		if ( 'admin_approval' === ur_get_single_post_meta( $form_id, 'user_registration_form_setting_login_options', get_option( 'user_registration_general_setting_login_options', 'default' ) ) ) {
-			$user_manager = new UR_Admin_User_Manager( $user );
+		$user_manager = new UR_Admin_User_Manager( $user );
 
-			$status = $user_manager->get_user_status();
+		$status = $user_manager->get_user_status();
 
-			do_action( 'ur_user_before_check_status_on_login', $status, $user );
+		if ( 'admin_approval' === ur_get_single_post_meta( $form_id, 'user_registration_form_setting_login_options', get_option( 'user_registration_general_setting_login_options', 'default' ) ) || 'admin_approval' === $status['login_option'] ) {
 
-			switch ( $status ) {
+			do_action( 'ur_user_before_check_status_on_login', $status['user_status'], $user );
+
+			switch ( $status['user_status'] ) {
 				case UR_Admin_User_Manager::APPROVED:
 					return $user;
 					break;
@@ -192,17 +198,16 @@ class UR_User_Approval {
 					return new WP_Error( 'denied_access', $message );
 					break;
 			}
-		} elseif ( 'email_confirmation' === ur_get_single_post_meta( $form_id, 'user_registration_form_setting_login_options', get_option( 'user_registration_general_setting_login_options', 'default' ) ) ) {
-			$email_status = get_user_meta( $user->ID, 'ur_confirm_email', true );
+		} elseif ( 'email_confirmation' === ur_get_single_post_meta( $form_id, 'user_registration_form_setting_login_options', get_option( 'user_registration_general_setting_login_options', 'default' ) ) || 'email_confirmation' === $status['login_option'] ) {
 
-			do_action( 'ur_user_before_check_email_status_on_login', $email_status, $user );
+			do_action( 'ur_user_before_check_email_status_on_login', $status['user_status'], $user );
 
 			$url      = ( ! empty( $_SERVER['HTTPS'] ) ) ? 'https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'] : 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 			$url      = substr( $url, 0, strpos( $url, '?' ) );
 			$instance = new UR_Email_Confirmation();
 			$url      = wp_nonce_url( $url . '?ur_resend_id=' . $instance->crypt_the_string( $user->ID, 'e' ) . '&ur_resend_token=true', 'ur_resend_token' );
 
-			if ( '0' === $email_status ) {
+			if ( '0' === $status['user_status'] ) {
 				$message = '<strong>' . esc_html__( 'ERROR:', 'user-registration' ) . '</strong> ' . sprintf( __( 'Your account is still pending approval. Verify your email by clicking on the link sent to your email. %s', 'user-registration' ), '<a id="resend-email" href="' . esc_url( $url ) . '">' . __( 'Resend Verification Link', 'user-registration' ) . '</a>' );
 				return new WP_Error( 'user_email_not_verified', $message );
 			}
@@ -243,7 +248,6 @@ class UR_User_Approval {
 
 			// Try to hide the not approved users from any theme or plugin request in frontend.
 			add_action( 'pre_get_users', array( $this, 'hide_not_approved_users_in_frontend' ) );
-
 			$status = ur_get_user_approval_status( get_current_user_id() );
 
 			$user_manager = new UR_Admin_User_Manager();
@@ -300,7 +304,8 @@ class UR_User_Approval {
 
 		$form_id = ur_get_form_id_by_userid( $user_id );
 
-		if ( 'admin_approval' === ur_get_single_post_meta( $form_id, 'user_registration_form_setting_login_options', get_option( 'user_registration_general_setting_login_options', 'default' ) ) ) {
+		// Check if the form is our form and the login option is admin approval.
+		if ( 0 !== $form_id && 'admin_approval' === ur_get_single_post_meta( $form_id, 'user_registration_form_setting_login_options', get_option( 'user_registration_general_setting_login_options', 'default' ) ) ) {
 			$user_manager = new UR_Admin_User_Manager( $user_id );
 
 			if ( ! $user_manager->is_approved() ) {

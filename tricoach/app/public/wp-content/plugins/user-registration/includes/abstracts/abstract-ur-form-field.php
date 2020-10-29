@@ -1,4 +1,5 @@
 <?php
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -100,7 +101,10 @@ abstract class UR_Form_Field {
 		ob_start();
 		$template_path       = str_replace( '_', '-', str_replace( 'user_registration_', 'admin-', $this->id ) );
 		$admin_template_path = apply_filters( $this->id . '_admin_template', UR_FORM_PATH . 'views' . UR_DS . 'admin' . UR_DS . $template_path . '.php' );
-		include $admin_template_path;
+
+		if ( file_exists( $admin_template_path ) ) {
+			include $admin_template_path;
+		}
 		$template = ob_get_clean();
 
 		$settings = $this->get_setting();
@@ -118,10 +122,11 @@ abstract class UR_Form_Field {
 	 * Includes any classes we need within frontend.
 	 */
 	public function frontend_includes( $data = array(), $form_id, $field_type, $field_key ) {
-		$this->form_id = $form_id;
 
-		$form_data         = (array) $data['general_setting'];
-		$form_data['type'] = $field_type;
+		$this->form_id        = $form_id;
+		$form_data            = (array) $data['general_setting'];
+		$form_data['form_id'] = $form_id;
+		$form_data['type']    = $field_type;
 
 		if ( isset( $form_data['hide_label'] ) && 'yes' === $form_data['hide_label'] ) {
 			unset( $form_data['label'] );
@@ -149,8 +154,16 @@ abstract class UR_Form_Field {
 			$form_data['max'] = $data['advance_setting']->max;
 		}
 
+		if ( isset( $data['advance_setting']->step ) ) {
+			$form_data['step'] = $data['advance_setting']->step;
+		}
+
 		if ( isset( $data['advance_setting']->default_value ) ) {
 			$form_data['default'] = $data['advance_setting']->default_value;
+		}
+
+		if ( isset( $data['general_setting']->max_files ) ) {
+			$form_data['max_files'] = $data['general_setting']->max_files;
 		}
 
 		$form_data['input_class'] = array( 'ur-frontend-field ' );
@@ -164,14 +177,16 @@ abstract class UR_Form_Field {
 			$form_data['custom_attributes']['data-date-format'] = $data['advance_setting']->date_format;
 		}
 
-		if ( isset( $data['advance_setting']->min_date ) ) {
-			$min_date                                        = str_replace( '/', '-', $data['advance_setting']->min_date );
-			$form_data['custom_attributes']['data-min-date'] = '' !== $min_date ? date( $data['advance_setting']->date_format, strtotime( $min_date ) ) : '';
-		}
+		if ( isset( $data['advance_setting']->enable_min_max ) && 'true' === $data['advance_setting']->enable_min_max ) {
+			if ( isset( $data['advance_setting']->min_date ) ) {
+				$min_date                                        = str_replace( '/', '-', $data['advance_setting']->min_date );
+				$form_data['custom_attributes']['data-min-date'] = '' !== $min_date ? date_i18n( $data['advance_setting']->date_format, strtotime( $min_date ) ) : '';
+			}
 
-		if ( isset( $data['advance_setting']->max_date ) ) {
-			$max_date                                        = str_replace( '/', '-', $data['advance_setting']->max_date );
-			$form_data['custom_attributes']['data-max-date'] = '' !== $max_date ? date( $data['advance_setting']->date_format, strtotime( $max_date ) ) : '';
+			if ( isset( $data['advance_setting']->max_date ) ) {
+				$max_date                                        = str_replace( '/', '-', $data['advance_setting']->max_date );
+				$form_data['custom_attributes']['data-max-date'] = '' !== $max_date ? date_i18n( $data['advance_setting']->date_format, strtotime( $max_date ) ) : '';
+			}
 		}
 
 		if ( isset( $data['advance_setting']->set_current_date ) ) {
@@ -194,7 +209,7 @@ abstract class UR_Form_Field {
 			$form_data['description'] = ur_string_translation( $form_id, 'user_registration_' . $data['general_setting']->field_name . '_description', $form_data['description'] );
 		}
 
-		// Filter only selected countries for `Country` fields
+		// Filter only selected countries for `Country` fields.
 		if ( 'country' === $field_key || 'billing_country' === $field_key || 'shipping_country' === $field_key ) {
 			$form_data['options'] = UR_Form_Field_Country::get_instance()->get_country();
 			$filtered_options     = array();
@@ -212,14 +227,14 @@ abstract class UR_Form_Field {
 		}
 
 		/**  Redundant codes. */
-		if ( 'select' === $field_key ) {
-			$option_data = isset( $data['advance_setting']->options ) ? explode( ',', $data['advance_setting']->options ) : array(); // Backward compatibility. Modified since 1.5.7
+		if ( 'select' === $field_key || 'select2' === $field_key || 'multi_select2' === $field_key ) {
+			$option_data = isset( $data['advance_setting']->options ) ? explode( ',', $data['advance_setting']->options ) : array(); // Backward compatibility. Modified since 1.5.7.
 			$option_data = isset( $data['general_setting']->options ) ? $data['general_setting']->options : $option_data;
-			$options = array();
+			$options     = array();
 
 			if ( is_array( $option_data ) ) {
 				foreach ( $option_data as $index_data => $option ) {
-					$options[ $option ]   = ur_string_translation( $form_id, 'user_registration_' . $data['general_setting']->field_name . '_option_' . ( ++$index_data ), $option );
+					$options[ $option ] = ur_string_translation( $form_id, 'user_registration_' . $data['general_setting']->field_name . '_option_' . ( ++$index_data ), $option );
 				}
 
 				$form_data['options'] = $options;
@@ -227,13 +242,13 @@ abstract class UR_Form_Field {
 		}
 
 		if ( 'radio' === $field_key ) {
-			$option_data = isset( $data['advance_setting']->options ) ? explode( ',', $data['advance_setting']->options ) : array(); // Backward compatibility. Modified since 1.5.7
+			$option_data = isset( $data['advance_setting']->options ) ? explode( ',', $data['advance_setting']->options ) : array(); // Backward compatibility. Modified since 1.5.7.
 			$option_data = isset( $data['general_setting']->options ) ? $data['general_setting']->options : $option_data;
 
 			$options = array();
 			if ( is_array( $option_data ) ) {
 				foreach ( $option_data as $index_data => $option ) {
-					$options[ $option ]   = ur_string_translation( $form_id, 'user_registration_' . $data['general_setting']->field_name . '_option_' . ( ++$index_data ), $option );
+					$options[ $option ] = ur_string_translation( $form_id, 'user_registration_' . $data['general_setting']->field_name . '_option_' . ( ++$index_data ), $option );
 				}
 
 				$form_data['options'] = $options;
@@ -241,13 +256,13 @@ abstract class UR_Form_Field {
 		}
 
 		if ( 'checkbox' === $field_key ) {
-			$choices     = isset( $data['advance_setting']->choices ) ? explode( ',', $data['advance_setting']->choices ) : array(); // Backward compatibility. Modified since 1.5.7
+			$choices     = isset( $data['advance_setting']->choices ) ? explode( ',', $data['advance_setting']->choices ) : array(); // Backward compatibility. Modified since 1.5.7.
 			$option_data = isset( $data['general_setting']->options ) ? $data['general_setting']->options : $choices;
 
 			$options = array();
 			if ( is_array( $option_data ) ) {
 				foreach ( $option_data as $index_data => $option ) {
-					$options[ $option ]   = ur_string_translation( $form_id, 'user_registration_' . $data['general_setting']->field_name . '_option_' . ( ++$index_data ), $option );
+					$options[ $option ] = ur_string_translation( $form_id, 'user_registration_' . $data['general_setting']->field_name . '_option_' . ( ++$index_data ), $option );
 				}
 
 				$form_data['options'] = $options;
@@ -313,8 +328,9 @@ abstract class UR_Form_Field {
 		$general_setting_html = '';
 
 		foreach ( $general_settings as $setting_key => $setting_value ) {
+			$tooltip_html             = ! empty( $setting_value['tip'] ) ? ur_help_tip( $setting_value['tip'], false, 'ur-portal-tooltip' ) : '';
 			$general_setting_wrapper  = '<div class="ur-general-setting ur-setting-' . $setting_value['type'] . ' ur-general-setting-' . str_replace( ' ', '-', strtolower( $setting_value['label'] ) ) . '">';
-			$general_setting_wrapper .= '<label for="ur-type-' . $setting_value['type'] . '">' . $setting_value['label'] . '</label>';
+			$general_setting_wrapper .= '<label for="ur-type-' . $setting_value['type'] . '">' . $setting_value['label'] . $tooltip_html . '</label>';
 			$sub_string_key           = substr( $this->id, strlen( 'user_registration_' ), 5 );
 			$strip_prefix             = substr( $this->id, 18 );
 
@@ -329,14 +345,14 @@ abstract class UR_Form_Field {
 					}
 					$disabled = '';
 					// To make invite code field name non editable.
-					if ( $value === 'invite_code' || $value === 'profile_pic_url' ) {
+					if ( 'invite_code' === $value || 'profile_pic_url' === $value ) {
 						$disabled = 'disabled';
 					}
 					$general_setting_wrapper .= $extra_attribute . ' ' . $disabled . '/>';
 					break;
 
 				case 'radio':
-					// Compatibility for older version. Get string value from options in advanced settings. Modified since @1.5.7
+					// Compatibility for older version. Get string value from options in advanced settings. Modified since @1.5.7.
 					$default_options = isset( $this->field_defaults['default_options'] ) ? $this->field_defaults['default_options'] : array();
 					$old_options     = isset( $this->admin_data->advance_setting->options ) ? explode( ',', trim( $this->admin_data->advance_setting->options, ',' ) ) : $default_options;
 					$options         = isset( $this->admin_data->general_setting->options ) ? $this->admin_data->general_setting->options : $old_options;
@@ -372,7 +388,7 @@ abstract class UR_Form_Field {
 					break;
 
 				case 'checkbox':
-					// Compatibility for older version. Get string value from options in advanced settings. Modified since @1.5.7
+					// Compatibility for older version. Get string value from options in advanced settings. Modified since @1.5.7.
 					$default_options = isset( $this->field_defaults['default_options'] ) ? $this->field_defaults['default_options'] : array();
 					$old_options     = isset( $this->admin_data->advance_setting->choices ) ? explode( ',', trim( $this->admin_data->advance_setting->choices, ',' ) ) : $default_options;
 					$options         = isset( $this->admin_data->general_setting->options ) ? $this->admin_data->general_setting->options : $old_options;
@@ -418,7 +434,13 @@ abstract class UR_Form_Field {
 					if ( isset( $setting_value['options'] )
 						&& gettype( $setting_value['options'] ) == 'array' ) {
 
-						$general_setting_wrapper .= '<select data-field="' . $setting_key . '" class="ur-general-setting-field ur-type-' . $setting_value['type'] . '"  name="' . $setting_value['name'] . '">';
+						$disabled = '';
+							// To make invite code required field non editable.
+						if ( 'required' === $setting_key && 'invite_code' === $strip_prefix ) {
+							$disabled = 'disabled';
+						}
+
+						$general_setting_wrapper .= '<select data-field="' . $setting_key . '" class="ur-general-setting-field ur-type-' . $setting_value['type'] . '"  name="' . $setting_value['name'] . '" ' . $disabled . '>';
 
 						foreach ( $setting_value['options'] as $option_key => $option_value ) {
 							$selected                 = $this->get_general_setting_data( $setting_key ) == $option_key ? "selected='selected'" : '';
@@ -441,16 +463,26 @@ abstract class UR_Form_Field {
 
 				case 'hidden':
 					$value = isset( $setting_value['default'] ) ? $setting_value['default'] : '';
-					if ( ! empty( $value ) ) {
 
-						$general_setting_wrapper .= '<input value="' . $value . '" data-field="' . $setting_key . '" class="ur-general-setting-field ur-type-' . $setting_value['type'] . '" type="hidden" name="' . $setting_value['name'] . '"  placeholder="' . $setting_value['placeholder'] . '"';
+					$general_setting_wrapper .= '<input value="' . $value . '" data-field="' . $setting_key . '" class="ur-general-setting-field ur-type-' . $setting_value['type'] . '" type="hidden" name="' . $setting_value['name'] . '"  placeholder="' . $setting_value['placeholder'] . '"';
 
-						if ( true == $setting_value['required'] ) {
-							$general_setting_wrapper .= ' required ';
-						}
-
-						$general_setting_wrapper .= '/>';
+					if ( true == $setting_value['required'] ) {
+						$general_setting_wrapper .= ' required ';
 					}
+
+					$general_setting_wrapper .= '/>';
+
+					break;
+				case 'number':
+					$val                      = $this->get_general_setting_data( $setting_key );
+					$value                    = ! empty( $val ) ? $val : $setting_value['default'];
+					$general_setting_wrapper .= '<input value="' . $value . '" data-field="' . $setting_key . '" class="ur-general-setting-field ur-type-' . $setting_value['type'] . '" type="number" name="' . $setting_value['name'] . '" min = "1"';
+
+					if ( true == $setting_value['required'] ) {
+						$general_setting_wrapper .= ' required ';
+					}
+
+					$general_setting_wrapper .= '/>';
 					break;
 
 				default:

@@ -53,15 +53,23 @@ class UR_Frontend_Form_Handler {
 			$form_data = array();
 		}
 
-		self::match_email( $form_data );
-		self::match_password( $form_data );
-
 		$form_field_data = self::get_form_field_data( $post_content_array );
 
-		self::add_hook( $form_field_data, $form_data );
-		self::validate_form_data( $form_field_data, $form_data );
+		self::match_email( $form_field_data, $form_data );
 
-		self::validate_password_data( $form_field_data, $form_data );
+		self::add_hook( $form_field_data, $form_data );
+		$activated_form_list = get_option( 'user_registration_auto_password_activated_forms', array() );
+
+		if ( in_array( $form_id, $activated_form_list ) ) {
+			do_action( 'user_registration_auto_generate_password' );
+			$user_pass = wp_slash( apply_filters( 'user_registration_auto_generated_password', 'user_pass' ) );
+			self::validate_form_data( $form_field_data, $form_data, $form_id );
+		} else {
+			self::match_password( $form_field_data, $form_data );
+			self::validate_form_data( $form_field_data, $form_data, $form_id );
+			self::validate_password_data( $form_field_data, $form_data );
+			$user_pass = wp_slash( self::$valid_form_data['user_pass']->value );
+		}
 
 		self::$response_array = apply_filters( 'user_registration_response_array', self::$response_array, $form_data, $form_id );
 
@@ -69,13 +77,14 @@ class UR_Frontend_Form_Handler {
 			$user_role = ! in_array( ur_get_form_setting_by_key( $form_id, 'user_registration_form_setting_default_user_role' ), array_keys( ur_get_default_admin_roles() ) ) ? 'subscriber' : ur_get_form_setting_by_key( $form_id, 'user_registration_form_setting_default_user_role' );
 			$user_role = apply_filters( 'user_registration_user_role', $user_role, self::$valid_form_data, $form_id );
 			$userdata  = array(
-				'user_login'   => isset( self::$valid_form_data['user_login'] ) ? self::$valid_form_data['user_login']->value : '',
-				'user_pass'    => wp_slash( self::$valid_form_data['user_pass']->value ),
-				'user_email'   => self::$valid_form_data['user_email']->value,
-				'display_name' => isset( self::$valid_form_data['display_name']->value ) ? self::$valid_form_data['display_name']->value : '',
-				'user_url'     => isset( self::$valid_form_data['user_url']->value ) ? self::$valid_form_data['user_url']->value : '',
+				'user_login'      => isset( self::$valid_form_data['user_login'] ) ? self::$valid_form_data['user_login']->value : '',
+				'user_pass'       => $user_pass,
+				'user_email'      => self::$valid_form_data['user_email']->value,
+				'display_name'    => isset( self::$valid_form_data['display_name']->value ) ? self::$valid_form_data['display_name']->value : '',
+				'user_url'        => isset( self::$valid_form_data['user_url']->value ) ? self::$valid_form_data['user_url']->value : '',
 				// When creating an user, `user_pass` is expected.
-				'role'         => $user_role,
+				'role'            => $user_role,
+				'user_registered' => current_time( 'Y-m-d H:i:s' ),
 			);
 
 			self::$valid_form_data = apply_filters( 'user_registration_before_register_user_filter', self::$valid_form_data, $form_id );
@@ -90,7 +99,6 @@ class UR_Frontend_Form_Handler {
 			$user_id = wp_insert_user( $userdata ); // Insert user data in users table.
 
 			self::ur_update_user_meta( $user_id, self::$valid_form_data, $form_id ); // Insert user data in usermeta table.
-			do_action( 'user_registration_after_register_user_action', self::$valid_form_data, $form_id, $user_id );
 
 			if ( $user_id > 0 ) {
 				$login_option   = ur_get_single_post_meta( $form_id, 'user_registration_form_setting_login_options', get_option( 'user_registration_general_setting_login_options', 'default' ) );
@@ -107,6 +115,7 @@ class UR_Frontend_Form_Handler {
 				$success_params['form_login_option'] = $login_option;
 				$success_params                      = apply_filters( 'user_registration_success_params', $success_params, self::$valid_form_data, $form_id, $user_id );
 
+				do_action( 'user_registration_after_register_user_action', self::$valid_form_data, $form_id, $user_id );
 				wp_send_json_success( $success_params );
 			}
 			wp_send_json_error(
@@ -134,7 +143,7 @@ class UR_Frontend_Form_Handler {
 		foreach ( $post_content_array as $row_index => $row ) {
 			foreach ( $row as $grid_index => $grid ) {
 				foreach ( $grid as $field_index => $field ) {
-					if ( 'confirm_user_pass' != $field->general_setting->field_name ) {
+					if ( isset( $field->general_setting->field_name ) && 'confirm_user_pass' != $field->general_setting->field_name ) {
 						array_push( $form_field_data_array, $field );
 					}
 				}
@@ -150,8 +159,9 @@ class UR_Frontend_Form_Handler {
 	 * @param  array $form_field_data Form Field Data.
 	 * @param  array $form_data  Form data to validate.
 	 */
-	private static function validate_form_data( $form_field_data = array(), $form_data = array() ) {
+	private static function validate_form_data( $form_field_data = array(), $form_data = array(), $form_id ) {
 		$form_data_field     = wp_list_pluck( $form_data, 'field_name' );
+		$form_field_data     = apply_filters( 'user_registration_add_form_field_data', $form_field_data, $form_id );
 		$form_key_list       = wp_list_pluck( wp_list_pluck( $form_field_data, 'general_setting' ), 'field_name' );
 		$duplicate_field_key = array_diff_key( $form_data_field, array_unique( $form_data_field ) );
 		if ( count( $duplicate_field_key ) > 0 ) {
@@ -164,7 +174,24 @@ class UR_Frontend_Form_Handler {
 			array_push( self::$response_array, __( 'Required form field not found.', 'user-registration' ) );
 		}
 
+		// Check if a required field is missing.
+		$missing_item = array_diff( $form_key_list, $form_data_field );
+
+		if ( count( $missing_item ) > 0 ) {
+
+			foreach ( $missing_item as $key => $value ) {
+
+				$ignorable_field = array( 'user_pass', 'user_confirm_password', 'user_confirm_email', 'invite_code', 'credit_card' );
+
+				// Ignoring confirm password and confirm email field, since they are handled separately.
+				if ( ! in_array( $value, $ignorable_field, true ) ) {
+					self::ur_missing_field_validation( $form_field_data, $key, $value );
+				}
+			}
+		}
+
 		foreach ( $form_data as $data ) {
+
 			if ( in_array( $data->field_name, $form_key_list ) ) {
 				$form_data_index                            = array_search( $data->field_name, $form_key_list );
 				$single_form_field                          = $form_field_data[ $form_data_index ];
@@ -178,6 +205,15 @@ class UR_Frontend_Form_Handler {
 				self::$valid_form_data[ $data->field_name ] = self::get_sanitize_value( $data );
 				$hook                                       = "user_registration_validate_{$single_form_field->field_key}";
 				$filter_hook                                = $hook . '_message';
+
+				if ( 'user_email' === $single_form_field->field_key ) {
+					do_action( 'user_registration_validate_email_whitelist', $data->value, $filter_hook );
+				}
+
+				if ( 'honeypot' === $single_form_field->field_key ) {
+					do_action( 'user_registration_validate_honeypot_container', $data, $filter_hook, $form_id, $form_data );
+				}
+
 				do_action( $hook, $single_form_field, $data, $filter_hook, self::$form_id );
 				$response = apply_filters( $filter_hook, '' );
 				if ( ! empty( $response ) ) {
@@ -298,13 +334,25 @@ class UR_Frontend_Form_Handler {
 	/**
 	 * Match password and confirm password field
 	 *
-	 * @param  obj $form_data Form data submitted.
+	 * @param  array $form_field_data Form Field Data.
+	 * @param  obj   $form_data Form data submitted.
 	 * @return obj $form_data
 	 */
-	private static function match_password( &$form_data ) {
+	private static function match_password( $form_field_data, &$form_data ) {
 		$confirm_password     = '';
 		$has_confirm_password = false;
 		$password             = '';
+
+		$form_data_field = wp_list_pluck( $form_data, 'field_name' );
+		$form_key_list   = wp_list_pluck( wp_list_pluck( $form_field_data, 'general_setting' ), 'field_name' );
+
+		// Check if a required field is missing.
+		$missing_item = array_diff( $form_key_list, $form_data_field );
+
+		// Check if the missing field is required confirm password field.
+		if ( in_array( 'user_confirm_password', $missing_item ) ) {
+				$has_confirm_password = true;
+		}
 
 		foreach ( $form_data as $index => $single_data ) {
 			if ( 'user_confirm_password' == $single_data->field_name ) {
@@ -330,14 +378,26 @@ class UR_Frontend_Form_Handler {
 	/**
 	 * Match email and confirm email field.
 	 *
-	 * @param  obj $form_data Form data submitted.
+	 * @param  array $form_field_data Form Field Data.
+	 * @param  obj   $form_data Form data submitted.
 	 * @return obj $form_data
 	 */
-	private static function match_email( &$form_data ) {
+	private static function match_email( $form_field_data, &$form_data ) {
 
 		$confirm_email_value = '';
 		$has_confirm_email   = false;
 		$email               = '';
+
+		$form_data_field = wp_list_pluck( $form_data, 'field_name' );
+		$form_key_list   = wp_list_pluck( wp_list_pluck( $form_field_data, 'general_setting' ), 'field_name' );
+
+		// Check if a required field is missing.
+		$missing_item = array_diff( $form_key_list, $form_data_field );
+
+		// Check if the missing field is required confirm email field.
+		if ( in_array( 'user_confirm_email', $missing_item ) ) {
+			$has_confirm_email = true;
+		}
 
 		foreach ( $form_data as $index => $single_data ) {
 			if ( 'user_confirm_email' == $single_data->field_name ) {
@@ -361,6 +421,32 @@ class UR_Frontend_Form_Handler {
 	}
 
 	/**
+	 * Validate missing required fields.
+	 *
+	 * @param  array  $form_field_data Form Field Data.
+	 * @param int    $key index of missing field in Form Field Data.
+	 * @param string $value field name of missing field.
+	 * @return obj $form_data
+	 */
+	private static function ur_missing_field_validation( $form_field_data, $key, $value ) {
+
+		if ( isset( $form_field_data[ $key ]->general_setting->field_name ) && $value == $form_field_data[ $key ]->general_setting->field_name ) {
+
+			if ( isset( $form_field_data[ $key ]->general_setting->required ) && 'yes' === $form_field_data[ $key ]->general_setting->required ) {
+
+				// Check for the field visibility settings.
+				if ( isset( $form_field_data[ $key ]->advance_setting->field_visibility ) && 'edit_form' === $form_field_data[ $key ]->advance_setting->field_visibility ) {
+					return;
+				} else {
+					$field_label = $form_field_data[ $key ]->general_setting->label;
+					$response    = sprintf( __( '%s is a required field.', 'user-registration' ), $field_label );
+					array_push( self::$response_array, $response );
+				}
+			}
+		}
+
+	}
+	/**
 	 * Validate password to check if match username or email address.
 	 *
 	 * @param  array $form_field_data Form field data.
@@ -373,14 +459,16 @@ class UR_Frontend_Form_Handler {
 
 		// Find email, username and password value.
 		foreach ( $form_data as $data ) {
-			if ( 'user_email' === $data->extra_params['field_key'] ) {
-				$email_value = strtolower( $data->value );
-			}
-			if ( 'user_login' === $data->extra_params['field_key'] ) {
-				$username_value = strtolower( $data->value );
-			}
-			if ( 'user_pass' === $data->extra_params['field_key'] ) {
-				$password_value = strtolower( $data->value );
+			if ( isset( $data->extra_params['field_key'] ) ) {
+				if ( 'user_email' === $data->extra_params['field_key'] ) {
+					$email_value = strtolower( $data->value );
+				}
+				if ( 'user_login' === $data->extra_params['field_key'] ) {
+					$username_value = strtolower( $data->value );
+				}
+				if ( 'user_pass' === $data->extra_params['field_key'] ) {
+					$password_value = strtolower( $data->value );
+				}
 			}
 		}
 
